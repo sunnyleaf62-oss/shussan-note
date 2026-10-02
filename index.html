@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ママノート</title>
-<meta name="theme-color" content="#FEF7F4">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ママノート">
@@ -14,9 +14,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <style>
 :root{
-  --bg:#FEF7F4; --bg2:#F9ECE7; --card:#FFFDFB; --ink:#4F3F42; --sub:#85707A; --faint:#CBB9BC;
-  --line:#F3E4E2; --blue:#EDBFBF; --blue-d:#E3969F; --blue-l:#FCE6E8; --acc-ink:#B24C5F;
-  --brown:#8FC3D2; --brown-d:#3F7F93; --brown-l:#E4F3F7;
+  --bg:#FFFFFF; --bg2:#FAF5E9; --card:#FFFFFF; --ink:#4F3F42; --sub:#85707A; --faint:#C9BDC0;
+  --line:#EFE2E1; --blue:#EDBFBF; --blue-d:#DFA4B4; --blue-l:#FAE6EA; --acc-ink:#B24C6A;
+  --brown:#B4D9E2; --brown-d:#3F7F93; --brown-l:#E6F3F6;
   --serif:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Yu Gothic","Noto Sans JP",sans-serif;
   --sans:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
 }
@@ -36,14 +36,14 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .back + .ph{padding-top:8px}
 
 /* cards */
-.card{background:var(--card);border-radius:26px;padding:20px;margin-bottom:16px;border:1px solid rgba(241,229,220,.8);box-shadow:0 10px 30px rgba(190,140,130,.07)}
+.card{background:var(--card);border-radius:26px;padding:20px;margin-bottom:16px;border:1px solid rgba(246,232,233,.95);box-shadow:0 10px 30px rgba(190,140,130,.07)}
 .card h2,.card h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:.03em}
 .card h3{font-size:17px}
 .sub{color:var(--sub);font-size:12.5px}
 .sec{font-family:var(--serif);font-size:15px;font-weight:600;margin:26px 2px 12px;color:var(--brown-d);letter-spacing:.04em}
 
 /* hero */
-.hero{background:#F7D0D4;color:var(--ink);border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(227,150,159,.32)}
+.hero{background:#F3CDD2;color:var(--ink);border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(223,164,180,.38)}
 .hero .hl{font-size:13px;opacity:.85;letter-spacing:.12em}
 .hero .big{font-family:var(--serif);font-size:20px;margin:4px 0 6px;display:flex;align-items:baseline;gap:4px;white-space:nowrap}
 .hero .big b{color:var(--acc-ink);font-size:64px;font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-left:2px}
@@ -51,7 +51,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .hero .hs{font-size:15px}
 .hero .hs b{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 2px}
 .hero .pb{background:rgba(255,253,250,.65);margin:18px 0 12px}
-.hero .pb i{background:#E3969F}
+.hero .pb i{background:#D88CA3}
 .hero .hm{display:flex;justify-content:space-between;font-size:12.5px;opacity:.9;gap:8px}
 .hero .lnk{margin-top:14px;font-size:12.5px;text-decoration:underline;text-underline-offset:3px;opacity:.9}
 .hero h2{font-size:19px}
@@ -64,7 +64,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 
 /* tiles */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(241,229,220,.8);box-shadow:0 8px 24px rgba(190,140,130,.06);display:flex;flex-direction:column;gap:8px;min-height:128px}
+.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.18);display:flex;flex-direction:column;gap:8px;min-height:128px}
 .tile-s .t{font-size:12.5px;color:var(--sub)}
 .tile-s .v{font-family:var(--serif);font-size:30px;line-height:1.15;font-weight:500}
 .tile-s .v small{font-size:13px;margin-left:2px}
@@ -72,8 +72,10 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .tile-s .n{font-size:12px;color:var(--sub)}
 
 /* link rows */
-.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(241,229,220,.8);box-shadow:0 8px 24px rgba(190,140,130,.05)}
+.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.15)}
 .lrow .ic{width:42px;height:42px;border-radius:14px;background:var(--blue-l);color:var(--acc-ink);display:grid;place-items:center;flex:none}
+.lrow .ic.c{background:#F1E9F5;color:#7E5D8C}
+.lrow .ic.d{background:#F9EDE5;color:#9A6A50}
 .lrow .ic.b{background:var(--brown-l);color:var(--brown-d)}
 .lrow .tt{flex:1;min-width:0}
 .lrow .tt b{display:block;font-family:var(--serif);font-size:16px;font-weight:600}
@@ -131,7 +133,7 @@ textarea.in{resize:vertical;line-height:1.6}
 /* timeline */
 .tl{position:relative;padding-left:24px;margin-top:6px}
 .tl:before{content:"";position:absolute;left:6px;top:10px;bottom:10px;width:2px;background:var(--line)}
-.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(241,229,220,.8);box-shadow:0 8px 24px rgba(190,140,130,.06)}
+.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.18)}
 .tli:before{content:"";position:absolute;left:-23px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
 .tli .d{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .tli .d b{font-family:var(--serif);font-size:16px;font-weight:600}
@@ -201,7 +203,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .mood-b.on{box-shadow:inset 0 0 0 2px var(--blue-d);background:var(--blue-l)}
 
 /* diary */
-.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(241,229,220,.8);box-shadow:0 8px 24px rgba(190,140,130,.05);align-items:center}
+.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.15);align-items:center}
 .dr .dd{width:48px;text-align:center;flex:none}
 .dr .dd b{display:block;font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.1}
 .dr .dd small{font-size:11px;color:var(--sub)}
@@ -223,7 +225,7 @@ textarea.in{resize:vertical;line-height:1.6}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 
 /* nav */
-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,252,247,.92);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
 nav div{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 10px 6px}
 nav button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:14px;color:#9B8780;font-size:10.5px;font-weight:600;text-align:center}
 nav button.on{color:var(--acc-ink);background:var(--blue-l)}
@@ -273,7 +275,7 @@ const pb=(p,c='')=>`<div class="pb ${c}" role="progressbar" aria-valuenow="${p}"
 
 /* ===== data ===== */
 const KEY='shussan-note-v1';
-const MOODS=[{v:1,n:'元気',c:'#B4D9E2'},{v:2,n:'軽い',c:'#E8E9C7'},{v:3,n:'普通',c:'#EDBFBF'},{v:4,n:'つらい',c:'#E3969F'},{v:5,n:'とてもつらい',c:'#C05468'}];
+const MOODS=[{v:1,n:'元気',c:'#B4D9E2'},{v:2,n:'軽い',c:'#F2E8CB'},{v:3,n:'普通',c:'#E2C3B1'},{v:4,n:'つらい',c:'#DFA4B4'},{v:5,n:'とてもつらい',c:'#BD9DC4'}];
 function defaults(){
   const L={
    '母乳育児':['母乳パッド','さく乳器','授乳クッション','乳首クリーム','母乳フリーザーパック'],
@@ -368,8 +370,8 @@ function vHome(){
    <button class="tile-s" data-act="go" data-v="cal"><span class="t">今月のつわり</span><span class="v" style="font-size:${mv.length?'22px':'30px'}">${mv.length?MOODS[Math.round(avg)-1].n:'―'}</span><span class="n">${mv.length?`${mv.length}日記録 平均${avg.toFixed(1)}`:'まだ記録がありません'}</span></button>
    <button class="tile-s" data-act="go" data-v="checkup"><span class="t">最近の健診</span><span class="v" style="font-size:22px">${last?jd(last.date,false):'―'}</span><span class="n">${last?(last.w!==''&&last.w!=null?`妊娠${last.w}週${last.d||0}日`:'記録あり'):'まだ記録がありません'}</span></button>
   </div>
-  <button class="lrow" data-act="go" data-v="echo"><span class="ic">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚</span></span>${ic('chev')}</button>
-  <button class="lrow" data-act="go" data-v="cal"><span class="ic b">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分（カレンダーから記録）</span></span>${ic('chev')}</button>`;
+  <button class="lrow" data-act="go" data-v="echo"><span class="ic c">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚</span></span>${ic('chev')}</button>
+  <button class="lrow" data-act="go" data-v="cal"><span class="ic d">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分（カレンダーから記録）</span></span>${ic('chev')}</button>`;
 }
 
 /* --- prep --- */
@@ -405,7 +407,7 @@ function spark(){
   const W=300,H=84,p=10,vs=pts.map(c=>parseFloat(c.efw)),mn=Math.min(...vs),mx=Math.max(...vs);
   const x=i=>p+i*(W-2*p)/(pts.length-1),y=v=>mx===mn?H/2:H-p-(v-mn)/(mx-mn)*(H-2*p);
   const line=vs.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#E3969F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#B24C5F" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
+  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#DFA4B4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#B24C6A" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
 }
 function vCheckup(){
   const list=[...S.checkups].sort((a,b)=>b.date.localeCompare(a.date));
@@ -468,7 +470,7 @@ function vCal(){
   let cells=WD.map(w=>`<div class="w">${w}</div>`).join('')+'<i></i>'.repeat(first);
   for(let d=1;d<=dim;d++){
     const k=`${Y}-${pad(M+1)}-${pad(d)}`,v=S.moods[k],g=gest(k),has=S.diary[k];
-    cells+=`<button class="${k===t?'td':''}" data-act="pickDay" data-date="${k}" aria-label="${M+1}月${d}日${g?' 妊娠'+g.w+'週'+g.d+'日':''} ${v?MOODS[v-1].n:''}${has?' 日記あり':''}" ${v?`style="background:${MOODS[v-1].c};color:${v>4?'#FFFDFB':'#4F3F42'}"`:''}>${d}${g?`<small class="${g.d===0?'wk0':''}">${g.w}w${g.d}d</small>`:''}${has?'<s></s>':''}</button>`;
+    cells+=`<button class="${k===t?'td':''}" data-act="pickDay" data-date="${k}" aria-label="${M+1}月${d}日${g?' 妊娠'+g.w+'週'+g.d+'日':''} ${v?MOODS[v-1].n:''}${has?' 日記あり':''}" ${v?`style="background:${MOODS[v-1].c};color:#4F3F42"`:''}>${d}${g?`<small class="${g.d===0?'wk0':''}">${g.w}w${g.d}d</small>`:''}${has?'<s></s>':''}</button>`;
   }
   const arr=monthMoods(Y,M),rec=arr.filter(Boolean),avg=rec.length?rec.reduce((a,b)=>a+b,0)/rec.length:0;
   const cnt=MOODS.map(m=>rec.filter(v=>v===m.v).length),hard=cnt[3]+cnt[4];
@@ -518,7 +520,7 @@ function vWish(){
 /* --- more / data --- */
 function vMore(){
   return head('もっと','記録や設定')+
-  `<button class="lrow" data-act="go" data-v="echo"><span class="ic">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚の写真</span></span>${ic('chev')}</button>
+  `<button class="lrow" data-act="go" data-v="echo"><span class="ic c">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚の写真</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="wish"><span class="ic">${ic('star')}</span><span class="tt"><b>やりたいことリスト</b><span>${wishStat().d} / ${wishStat().t} 達成</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="data"><span class="ic b">${ic('save')}</span><span class="tt"><b>設定とバックアップ</b><span>予定日・書き出し・読み込み</span></span>${ic('chev')}</button>`;
 }
