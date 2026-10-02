@@ -1,12 +1,12 @@
 {
-  "name": "出産準備ノート",
-  "short_name": "出産準備",
+  "name": "ママノート",
+  "short_name": "ママノート",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#FCF2EF",
-  "theme_color": "#FCF2EF",
+  "background_color": "#FEF7F4",
+  "theme_color": "#FEF7F4",
   "icons": [
     {
       "src": "icon-192.png",
