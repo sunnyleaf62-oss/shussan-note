@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>出産準備ノート</title>
-<meta name="theme-color" content="#F7F2EA">
+<meta name="theme-color" content="#FCF2EF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="出産準備ノート">
@@ -14,11 +14,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <style>
 :root{
-  --bg:#F7F2EA; --bg2:#EFE8DC; --card:#FFFCF7; --ink:#4B4038; --sub:#85776A; --faint:#B9AC9F;
-  --line:#EAE1D4; --blue:#92B2BF; --blue-d:#5B8394; --blue-l:#E1ECEF;
-  --brown:#A58B72; --brown-d:#7A624D; --brown-l:#EFE5D8;
-  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","YuMincho",serif;
-  --sans:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+  --bg:#FCF2EF; --bg2:#F5E6E2; --card:#FFFDFB; --ink:#4E3F3C; --sub:#84706A; --faint:#C2AFA9;
+  --line:#F1E2DD; --blue:#EDB9BF; --blue-d:#B5707C; --blue-l:#FAE6E8;
+  --brown:#B39580; --brown-d:#7F6350; --brown-l:#F4E8DE;
+  --serif:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Yu Gothic","Noto Sans JP",sans-serif;
+  --sans:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
@@ -36,14 +36,14 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .back + .ph{padding-top:8px}
 
 /* cards */
-.card{background:var(--card);border-radius:22px;padding:20px;margin-bottom:16px;border:1px solid rgba(234,225,212,.8);box-shadow:0 10px 30px rgba(122,98,77,.07)}
+.card{background:var(--card);border-radius:26px;padding:20px;margin-bottom:16px;border:1px solid rgba(241,226,221,.8);box-shadow:0 10px 30px rgba(160,100,104,.07)}
 .card h2,.card h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:.03em}
 .card h3{font-size:17px}
 .sub{color:var(--sub);font-size:12.5px}
 .sec{font-family:var(--serif);font-size:15px;font-weight:600;margin:26px 2px 12px;color:var(--brown-d);letter-spacing:.04em}
 
 /* hero */
-.hero{background:var(--blue-d);color:#FFFCF7;border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(91,131,148,.28)}
+.hero{background:var(--blue-d);color:#FFFCF7;border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(181,112,124,.30)}
 .hero .hl{font-size:13px;opacity:.85;letter-spacing:.12em}
 .hero .big{font-family:var(--serif);font-size:20px;margin:4px 0 6px;display:flex;align-items:baseline;gap:4px;white-space:nowrap}
 .hero .big b{font-size:64px;font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-left:2px}
@@ -64,7 +64,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 
 /* tiles */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(234,225,212,.8);box-shadow:0 8px 24px rgba(122,98,77,.06);display:flex;flex-direction:column;gap:8px;min-height:128px}
+.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(241,226,221,.8);box-shadow:0 8px 24px rgba(160,100,104,.06);display:flex;flex-direction:column;gap:8px;min-height:128px}
 .tile-s .t{font-size:12.5px;color:var(--sub)}
 .tile-s .v{font-family:var(--serif);font-size:30px;line-height:1.15;font-weight:500}
 .tile-s .v small{font-size:13px;margin-left:2px}
@@ -72,7 +72,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .tile-s .n{font-size:12px;color:var(--sub)}
 
 /* link rows */
-.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(234,225,212,.8);box-shadow:0 8px 24px rgba(122,98,77,.05)}
+.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(241,226,221,.8);box-shadow:0 8px 24px rgba(160,100,104,.05)}
 .lrow .ic{width:42px;height:42px;border-radius:14px;background:var(--blue-l);color:var(--blue-d);display:grid;place-items:center;flex:none}
 .lrow .ic.b{background:var(--brown-l);color:var(--brown-d)}
 .lrow .tt{flex:1;min-width:0}
@@ -131,7 +131,7 @@ textarea.in{resize:vertical;line-height:1.6}
 /* timeline */
 .tl{position:relative;padding-left:24px;margin-top:6px}
 .tl:before{content:"";position:absolute;left:6px;top:10px;bottom:10px;width:2px;background:var(--line)}
-.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(234,225,212,.8);box-shadow:0 8px 24px rgba(122,98,77,.06)}
+.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(241,226,221,.8);box-shadow:0 8px 24px rgba(160,100,104,.06)}
 .tli:before{content:"";position:absolute;left:-23px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
 .tli .d{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .tli .d b{font-family:var(--serif);font-size:16px;font-weight:600}
@@ -144,7 +144,7 @@ textarea.in{resize:vertical;line-height:1.6}
 
 /* echo */
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pt{position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;background:var(--bg2);display:block;width:100%;box-shadow:0 8px 22px rgba(122,98,77,.12)}
+.pt{position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;background:var(--bg2);display:block;width:100%;box-shadow:0 8px 22px rgba(160,100,104,.12)}
 .pt img{width:100%;height:100%;object-fit:cover;display:block}
 .pt span{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;color:#FFFCF7;font-size:12px;line-height:1.4;background:linear-gradient(transparent,rgba(60,48,40,.62))}
 .pt span b{display:block;font-family:var(--serif);font-size:15px;font-weight:600}
@@ -168,8 +168,17 @@ textarea.in{resize:vertical;line-height:1.6}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .cal .w{text-align:center;font-size:11px;color:var(--sub);padding-bottom:4px}
 .cal .w:first-child{color:#B77F72}
-.cal .w:last-child{color:var(--blue-d)}
-.cal button,.cal i{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:14px;background:var(--bg)}
+.cal .w:last-child{color:#7C9BAA}
+.cal button,.cal i{aspect-ratio:1/1.34;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:var(--serif);font-size:15px;line-height:1.1;background:var(--bg);padding:0;position:relative;min-width:0}
+.cal button small{font-size:9.5px;opacity:.72;letter-spacing:-.02em;font-family:var(--sans)}
+.cal button small.wk0{opacity:1;font-weight:700}
+.cal button s{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--brown-d);box-shadow:0 0 0 1.5px #FFFDFB;text-decoration:none}
+.moods{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.mood-c{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:99px;background:var(--bg);font-weight:600;font-size:14px}
+.mood-c u{width:16px;height:16px;border-radius:50%;display:block}
+.mood-c.on{box-shadow:inset 0 0 0 2px var(--blue-d);background:var(--blue-l)}
+.pvs{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.pvs img{width:64px;height:64px;border-radius:12px;object-fit:cover}
 .cal button.td{box-shadow:0 0 0 2px var(--blue-d)}
 .cal i{background:none}
 .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:16px;font-size:12px;color:var(--sub)}
@@ -192,7 +201,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .mood-b.on{box-shadow:inset 0 0 0 2px var(--blue-d);background:var(--blue-l)}
 
 /* diary */
-.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(234,225,212,.8);box-shadow:0 8px 24px rgba(122,98,77,.05);align-items:center}
+.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(241,226,221,.8);box-shadow:0 8px 24px rgba(160,100,104,.05);align-items:center}
 .dr .dd{width:48px;text-align:center;flex:none}
 .dr .dd b{display:block;font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.1}
 .dr .dd small{font-size:11px;color:var(--sub)}
@@ -264,7 +273,7 @@ const pb=(p,c='')=>`<div class="pb ${c}" role="progressbar" aria-valuenow="${p}"
 
 /* ===== data ===== */
 const KEY='shussan-note-v1';
-const MOODS=[{v:1,n:'元気',c:'#BCD2DA'},{v:2,n:'軽い',c:'#98B8C4'},{v:3,n:'普通',c:'#DDCFBC'},{v:4,n:'つらい',c:'#B79C83'},{v:5,n:'とてもつらい',c:'#8A6A54'}];
+const MOODS=[{v:1,n:'元気',c:'#F4CFD3'},{v:2,n:'軽い',c:'#E8A9B2'},{v:3,n:'普通',c:'#E6D6C6'},{v:4,n:'つらい',c:'#C99C90'},{v:5,n:'とてもつらい',c:'#8F625E'}];
 function defaults(){
   const L={
    'ベビー服':['ボディ肌着 … 6枚','2wayオール … 3枚','おくるみ … 2枚','スワドル … 2枚','ガーゼ … 10枚程度',['退院着','マストではない。短肌着はあまり使わない派が多いので、必要なら産後に購入。']],
@@ -342,11 +351,11 @@ function vHome(){
   <div class="grid2">
    <button class="tile-s" data-act="go" data-v="prep"><span class="t">出産準備</span><span class="v">${ps.p}<small>%</small></span>${pb(ps.p)}<span class="n">${ps.d} / ${ps.t} 完了</span></button>
    <button class="tile-s" data-act="go" data-v="wish"><span class="t">やりたいこと</span><span class="v">${ws.p}<small>%</small></span>${pb(ws.p,'br')}<span class="n">${ws.d} / ${ws.t} 達成</span></button>
-   <button class="tile-s" data-act="go" data-v="sick"><span class="t">今月のつわり</span><span class="v" style="font-size:${mv.length?'22px':'30px'}">${mv.length?MOODS[Math.round(avg)-1].n:'―'}</span><span class="n">${mv.length?`${mv.length}日記録 平均${avg.toFixed(1)}`:'まだ記録がありません'}</span></button>
+   <button class="tile-s" data-act="go" data-v="cal"><span class="t">今月のつわり</span><span class="v" style="font-size:${mv.length?'22px':'30px'}">${mv.length?MOODS[Math.round(avg)-1].n:'―'}</span><span class="n">${mv.length?`${mv.length}日記録 平均${avg.toFixed(1)}`:'まだ記録がありません'}</span></button>
    <button class="tile-s" data-act="go" data-v="checkup"><span class="t">最近の健診</span><span class="v" style="font-size:22px">${last?jd(last.date,false):'―'}</span><span class="n">${last?(last.w!==''&&last.w!=null?`妊娠${last.w}週${last.d||0}日`:'記録あり'):'まだ記録がありません'}</span></button>
   </div>
   <button class="lrow" data-act="go" data-v="echo"><span class="ic">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚</span></span>${ic('chev')}</button>
-  <button class="lrow" data-act="go" data-v="diary"><span class="ic b">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分</span></span>${ic('chev')}</button>`;
+  <button class="lrow" data-act="go" data-v="cal"><span class="ic b">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分（カレンダーから記録）</span></span>${ic('chev')}</button>`;
 }
 
 /* --- prep --- */
@@ -382,7 +391,7 @@ function spark(){
   const W=300,H=84,p=10,vs=pts.map(c=>parseFloat(c.efw)),mn=Math.min(...vs),mx=Math.max(...vs);
   const x=i=>p+i*(W-2*p)/(pts.length-1),y=v=>mx===mn?H/2:H-p-(v-mn)/(mx-mn)*(H-2*p);
   const line=vs.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#92B2BF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFCF7" stroke="#5B8394" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
+  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#EDB9BF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#B5707C" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
 }
 function vCheckup(){
   const list=[...S.checkups].sort((a,b)=>b.date.localeCompare(a.date));
@@ -430,59 +439,57 @@ function showLb(id){
 }
 function closeLb(){ui.lb=null;$('#lb').classList.remove('on');$('#lb').innerHTML='';document.body.style.overflow=''}
 
-/* --- sick --- */
-function vSick(){
+/* --- calendar (つわり + 日記) --- */
+let dayDraft=null;
+function dList(){
+  const q=ui.q.trim().toLowerCase();const[Y,M]=ui.ym;const pre=`${Y}-${pad(M+1)}-`;
+  const es=Object.entries(S.diary).sort((a,b)=>b[0].localeCompare(a[0])).filter(([k,e])=>q?((e.t||'').toLowerCase().includes(q)||k.includes(q)||jd(k).includes(q)):k.startsWith(pre));
+  if(!es.length)return `<div class="empty">${q?'見つかりませんでした。':'この月の日記はまだありません。<br>日付をタップして書いてみましょう。'}</div>`;
+  return es.map(([k,e])=>{const[,m,d]=k.split('-').map(Number);const g=gest(k);
+   return `<button class="dr" data-act="pickDay" data-date="${k}"><div class="dd"><b>${d}</b><small>${m}月 ${WD[new Date(k.slice(0,4),m-1,d).getDay()]}</small></div><div class="tt">${g?`<small>${g.w}w${g.d}d</small>`:''}${esc(e.t)}</div>${e.p?`<img src="${e.p}" alt="">`:''}</button>`}).join('');
+}
+function vCal(){
   if(!ui.ym){const n=new Date();ui.ym=[n.getFullYear(),n.getMonth()]}
   const[Y,M]=ui.ym,first=new Date(Y,M,1).getDay(),dim=new Date(Y,M+1,0).getDate(),t=todayS();
   let cells=WD.map(w=>`<div class="w">${w}</div>`).join('')+'<i></i>'.repeat(first);
   for(let d=1;d<=dim;d++){
-    const k=`${Y}-${pad(M+1)}-${pad(d)}`,v=S.moods[k];
-    cells+=`<button class="${k===t?'td':''}" data-act="pickDay" data-date="${k}" aria-label="${M+1}月${d}日 ${v?MOODS[v-1].n:'未記録'}" ${v?`style="background:${MOODS[v-1].c};color:${v>3?'#FFFCF7':'#4B4038'}"`:''}>${d}</button>`;
+    const k=`${Y}-${pad(M+1)}-${pad(d)}`,v=S.moods[k],g=gest(k),has=S.diary[k];
+    cells+=`<button class="${k===t?'td':''}" data-act="pickDay" data-date="${k}" aria-label="${M+1}月${d}日${g?' 妊娠'+g.w+'週'+g.d+'日':''} ${v?MOODS[v-1].n:''}${has?' 日記あり':''}" ${v?`style="background:${MOODS[v-1].c};color:${v>3?'#FFFDFB':'#4E3F3C'}"`:''}>${d}${g?`<small class="${g.d===0?'wk0':''}">${g.w}w${g.d}d</small>`:''}${has?'<s></s>':''}</button>`;
   }
   const arr=monthMoods(Y,M),rec=arr.filter(Boolean),avg=rec.length?rec.reduce((a,b)=>a+b,0)/rec.length:0;
   const cnt=MOODS.map(m=>rec.filter(v=>v===m.v).length),hard=cnt[3]+cnt[4];
-  const bars=arr.map(v=>`<i style="height:${v?v*20:4}%;background:${v?MOODS[v-1].c:'#EAE1D4'}"></i>`).join('');
-  // monthly averages
+  const bars=arr.map(v=>`<i style="height:${v?v*20:4}%;background:${v?MOODS[v-1].c:'#F1E2DD'}"></i>`).join('');
   const g={};Object.entries(S.moods).forEach(([k,v])=>{const m=k.slice(0,7);(g[m]=g[m]||[]).push(v)});
   const months=Object.keys(g).sort().slice(-8);
-  return head('つわり記録','体調を日ごとに記録して推移を見る')+
+  return head('カレンダー','日記とつわりを日ごとに記録')+
   `<div class="card"><div class="mh"><button data-act="monthPrev" aria-label="前の月">${ic('back')}</button><b>${Y}年${M+1}月</b><button data-act="monthNext" aria-label="次の月">${ic('chev')}</button></div>
    <div class="cal">${cells}</div>
-   <div class="legend">${MOODS.map(m=>`<span><u style="background:${m.c}"></u>${m.n}</span>`).join('')}</div></div>
-   <div class="card"><h3>${M+1}月の推移</h3>
+   <div class="legend">${MOODS.map(m=>`<span><u style="background:${m.c}"></u>${m.n}</span>`).join('')}<span><u style="background:var(--brown-d);width:7px;height:7px"></u>日記あり</span></div>
+   <p class="note">${S.due?'日付の下は妊娠週数です（例：12w3d ＝ 12週3日）。':'出産予定日を設定すると、日付の下に妊娠週数（例：12w3d）が表示されます。'}日付をタップして、つわりと日記を記録できます。</p></div>
+   <div class="card"><h3>${M+1}月のつわりの推移</h3>
     ${rec.length?`<div class="bars" role="img" aria-label="日ごとの体調の推移">${bars}</div><div class="axis"><span>1日</span><span>${dim}日</span></div>
     <div class="dist">${MOODS.map((m,i)=>cnt[i]?`<i style="width:${cnt[i]/rec.length*100}%;background:${m.c}"></i>`:'').join('')}</div>
-    <div class="sum" style="margin-top:16px"><div><small>記録した日</small><b>${rec.length}日</b></div><div><small>平均</small><b>${MOODS[Math.round(avg)-1].n}</b></div><div><small>つらい日（とてもつらい含む）</small><b>${hard}日</b></div><div><small>元気・軽い日</small><b>${cnt[0]+cnt[1]}日</b></div></div>`
-    :`<p class="sub" style="margin:10px 0 0">この月の記録はまだありません。日付をタップして追加しましょう。</p>`}</div>
-   ${months.length?`<div class="card"><h3>月ごとの平均</h3>${months.map(m=>{const a=g[m].reduce((x,y)=>x+y,0)/g[m].length;return `<div class="mm"><span>${+m.slice(5)}月</span>${pb(Math.round(a/5*100),a>=3.5?'br':'')}<b>${a.toFixed(1)}</b></div>`}).join('')}<p class="note">数値が小さいほど体調が良い日が多いことを表します（1=元気、5=とてもつらい）。</p></div>`:''}`;
+    <div class="sum" style="margin-top:16px"><div><small>記録した日</small><b>${rec.length}日</b></div><div><small>平均</small><b>${MOODS[Math.round(avg)-1].n}</b></div><div><small>つらい日</small><b>${hard}日</b></div><div><small>元気・軽い日</small><b>${cnt[0]+cnt[1]}日</b></div></div>`
+    :`<p class="sub" style="margin:10px 0 0">この月の記録はまだありません。</p>`}</div>
+   ${months.length?`<div class="card"><h3>月ごとの平均</h3>${months.map(m=>{const a=g[m].reduce((x,y)=>x+y,0)/g[m].length;return `<div class="mm"><span>${+m.slice(5)}月</span>${pb(Math.round(a/5*100),a>=3.5?'br':'')}<b>${a.toFixed(1)}</b></div>`}).join('')}<p class="note">数値が小さいほど体調が良い日が多いことを表します（1=元気、5=とてもつらい）。</p></div>`:''}
+   <div class="sec">日記</div>
+   <input class="in" type="search" id="dq" data-q placeholder="日記を検索（全期間）" value="${esc(ui.q)}" style="margin-bottom:16px" aria-label="日記を検索">
+   <div id="dlist">${dList()}</div>`;
 }
-function moodSheet(k){
-  const cur=S.moods[k];
-  sheet(`<h2>${jd(k)}</h2>${MOODS.map(m=>`<button class="mood-b ${cur===m.v?'on':''}" data-act="setMood" data-date="${k}" data-v="${m.v}"><u style="background:${m.c}"></u>${m.n}</button>`).join('')}${cur?`<button class="btn-text danger" data-act="setMood" data-date="${k}" data-v="0">記録を消す</button>`:''}`);
-}
-
-/* --- diary --- */
-function loadDraft(date){const e=S.diary[date];ui.draft={date,t:e?e.t:'',p:e?e.p||'':''}}
-function dList(){
-  const q=ui.q.trim().toLowerCase();
-  const es=Object.entries(S.diary).sort((a,b)=>b[0].localeCompare(a[0])).filter(([k,e])=>!q||(e.t||'').toLowerCase().includes(q)||k.includes(q)||jd(k).includes(q));
-  if(!es.length)return `<div class="empty">${q?'見つかりませんでした。':'まだ日記がありません。<br>今日の一行を書いてみましょう。'}</div>`;
-  return es.map(([k,e])=>{const[,m,d]=k.split('-').map(Number);const g=gest(k);
-   return `<button class="dr" data-act="diaryEdit" data-date="${k}"><div class="dd"><b>${d}</b><small>${m}月 ${WD[new Date(k.slice(0,4),m-1,d).getDay()]}</small></div><div class="tt">${g?`<small>${gtxt(g)}</small>`:''}${esc(e.t)}</div>${e.p?`<img src="${e.p}" alt="">`:''}</button>`}).join('');
-}
-function vDiary(){
-  if(!ui.draft)loadDraft(todayS());
-  const D=ui.draft,has=!!S.diary[D.date],g=gest(D.date);
-  return subHead('妊娠日記','1日1行、小さな記録を重ねる')+
-  `<form class="card dform" data-form="diarySave">
-    <label class="fl" style="margin-bottom:12px">日付${g?`（妊娠${gtxt(g)}）`:''}<input class="in" type="date" data-diary="date" value="${D.date}" required></label>
-    <input class="in" data-diary="t" maxlength="100" placeholder="今日のひとこと" value="${esc(D.t)}" autocomplete="off" aria-label="今日のひとこと">
-    ${D.p?`<div class="pvs"><img src="${D.p}" alt=""><button type="button" class="sub" data-act="diaryPhotoClear" style="text-decoration:underline">写真を外す</button></div>`:''}
-    <div class="acts"><label class="btn ghost sm" for="dph">${ic('img')}写真</label><input class="hid" type="file" accept="image/*" id="dph" data-photo="diary"><button class="btn" style="flex:1">${has?'更新する':'保存する'}</button></div>
-    ${has?`<button type="button" class="btn-text danger" data-act="diaryDel" data-date="${D.date}">この日の日記を削除</button>`:''}
-  </form>
-  <input class="in" type="search" id="dq" data-q placeholder="日記を検索" value="${esc(ui.q)}" style="margin-bottom:16px" aria-label="日記を検索">
-  <div id="dlist">${dList()}</div>`;
+function pvHtml(){return dayDraft&&dayDraft.p?`<div class="pvs"><img src="${dayDraft.p}" alt=""><button type="button" class="sub" data-act="dayPhotoClear" style="text-decoration:underline">写真を外す</button></div>`:''}
+function daySheet(k){
+  const e=S.diary[k]||{t:'',p:''},g=gest(k);
+  dayDraft={date:k,mood:S.moods[k]||0,p:e.p||''};
+  const has=!!(S.moods[k]||S.diary[k]);
+  sheet(`<h2>${jd(k)}</h2>${g?`<p style="margin:-8px 0 18px"><span class="badge">妊娠${g.w}週${g.d}日（${g.w}w${g.d}d）</span></p>`:''}
+  <div class="fl" style="margin-bottom:8px">つわり・体調</div>
+  <div class="moods">${MOODS.map(m=>`<button type="button" class="mood-c ${dayDraft.mood===m.v?'on':''}" data-act="dayMood" data-v="${m.v}"><u style="background:${m.c}"></u>${m.n}</button>`).join('')}</div>
+  <form data-form="dayForm"><input type="hidden" name="date" value="${k}">
+   <label class="fl">日記（1日1行）<input class="in" name="t" maxlength="100" value="${esc(e.t)}" placeholder="今日のひとこと" autocomplete="off"></label>
+   <div id="dpv">${pvHtml()}</div>
+   <label class="btn ghost block" for="dph" style="margin:0 0 12px">${ic('img')}写真を添付</label><input class="hid" type="file" accept="image/*" id="dph" data-photo="day">
+   <button class="btn block">保存</button>
+   ${has?`<button type="button" class="btn-text danger" data-act="dayClear" data-date="${k}">この日の記録を消す</button>`:''}</form>`);
 }
 
 /* --- wish --- */
@@ -498,7 +505,6 @@ function vWish(){
 function vMore(){
   return head('もっと','記録や設定')+
   `<button class="lrow" data-act="go" data-v="echo"><span class="ic">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚の写真</span></span>${ic('chev')}</button>
-   <button class="lrow" data-act="go" data-v="diary"><span class="ic b">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="wish"><span class="ic">${ic('star')}</span><span class="tt"><b>やりたいことリスト</b><span>${wishStat().d} / ${wishStat().t} 達成</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="data"><span class="ic b">${ic('save')}</span><span class="tt"><b>設定とバックアップ</b><span>予定日・書き出し・読み込み</span></span>${ic('chev')}</button>`;
 }
@@ -514,11 +520,11 @@ function vData(){
 }
 
 /* ===== render ===== */
-const VIEWS={home:vHome,prep:vPrep,checkup:vCheckup,sick:vSick,more:vMore,echo:vEcho,diary:vDiary,wish:vWish,data:vData};
+const VIEWS={home:vHome,prep:vPrep,checkup:vCheckup,cal:vCal,more:vMore,echo:vEcho,wish:vWish,data:vData};
 function render(){
   $('#view').innerHTML=VIEWS[ui.view]();
-  const cur=['echo','diary','wish','data'].includes(ui.view)?'more':ui.view;
-  const tabs=[['home','ホーム','home'],['prep','準備','list'],['checkup','健診','pulse'],['sick','つわり','cal'],['more','もっと','dots']];
+  const cur=['echo','wish','data'].includes(ui.view)?'more':ui.view;
+  const tabs=[['home','ホーム','home'],['prep','準備','list'],['checkup','健診','pulse'],['cal','カレンダー','cal'],['more','もっと','dots']];
   $('#nav').innerHTML=tabs.map(([v,l,i])=>`<button class="${cur===v?'on':''}" data-act="go" data-v="${v}" ${cur===v?'aria-current="page"':''}>${ic(i)}${l}</button>`).join('');
 }
 
@@ -540,11 +546,10 @@ const A={
  delEcho:d=>{if(!confirm('この写真を削除しますか？'))return;S.echoes=S.echoes.filter(e=>e.id!==d.id);save();closeLb();render()},
  monthPrev:()=>{let[y,m]=ui.ym;m--;if(m<0){m=11;y--}ui.ym=[y,m];render()},
  monthNext:()=>{let[y,m]=ui.ym;m++;if(m>11){m=0;y++}ui.ym=[y,m];render()},
- pickDay:d=>moodSheet(d.date),
- setMood:d=>{const v=+d.v;if(v)S.moods[d.date]=v;else delete S.moods[d.date];save();closeSheet();render()},
- diaryEdit:d=>{loadDraft(d.date);render();window.scrollTo({top:0,behavior:'smooth'})},
- diaryDel:d=>{if(!confirm('この日の日記を削除しますか？'))return;delete S.diary[d.date];save();loadDraft(d.date);render()},
- diaryPhotoClear:()=>{ui.draft.p='';render()},
+ pickDay:d=>daySheet(d.date),
+ dayMood:d=>{const v=+d.v;dayDraft.mood=dayDraft.mood===v?0:v;document.querySelectorAll('.mood-c').forEach(b=>b.classList.toggle('on',+b.dataset.v===dayDraft.mood))},
+ dayPhotoClear:()=>{dayDraft.p='';$('#dpv').innerHTML=pvHtml()},
+ dayClear:d=>{if(!confirm('この日のつわりと日記を消しますか？'))return;delete S.moods[d.date];delete S.diary[d.date];save();closeSheet();render()},
  toggleWish:d=>{const w=S.wishes.find(w=>w.id===d.id);if(w){w.done=!w.done;save();render()}},
  delWish:d=>{const w=S.wishes.find(w=>w.id===d.id);if(!w||!confirm(`「${w.t}」を削除しますか？`))return;S.wishes=S.wishes.filter(x=>x.id!==d.id);save();render()},
  exportData:async()=>{
@@ -570,11 +575,12 @@ const F={
   S.echoes.push(e);if(!save()){S.echoes.pop();return}
   closeSheet();render();toast('保存しました')
  },
- diarySave:()=>{
-  const D=ui.draft;if(!D.t.trim()&&!D.p){toast('ひとことを入力してください');return}
-  const prev=S.diary[D.date];S.diary[D.date]={t:D.t.trim(),p:D.p};
-  if(!save()){if(prev)S.diary[D.date]=prev;else delete S.diary[D.date];return}
-  render();toast('保存しました')
+ dayForm:(f,fd)=>{
+  const k=fd.get('date'),t=(fd.get('t')||'').trim(),m=dayDraft.mood,p=dayDraft.p,pm=S.moods[k],pd=S.diary[k];
+  if(m)S.moods[k]=m;else delete S.moods[k];
+  if(t||p)S.diary[k]={t,p};else delete S.diary[k];
+  if(!save()){if(pm)S.moods[k]=pm;else delete S.moods[k];if(pd)S.diary[k]=pd;else delete S.diary[k];return}
+  closeSheet();render();toast('保存しました')
  }
 };
 document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;const fn=A[el.dataset.act];if(fn)fn(el.dataset,el,e)});
@@ -582,16 +588,14 @@ document.addEventListener('submit',e=>{const f=e.target.closest('[data-form]');i
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.dataset.memo){const[c,i]=t.dataset.memo.split('|');const it=S.cats.find(x=>x.id===c)?.items.find(x=>x.id===i);if(it){it.memo=t.value;save()}}
-  else if(t.dataset.diary==='t'){ui.draft.t=t.value}
   else if(t.matches('[data-q]')){ui.q=t.value;$('#dlist').innerHTML=dList()}
 });
 document.addEventListener('change',e=>{
   const t=e.target;
   if(t.matches('[data-gauto]')&&t.form){const g=gest(t.value);if(g){t.form.w.value=g.w;t.form.d.value=g.d}}
-  else if(t.dataset.diary==='date'){if(t.value){loadDraft(t.value);render()}}
   else if(t.dataset.photo){
     const f=t.files[0];if(!f)return;
-    readImg(f).then(u=>{if(t.dataset.photo==='echo'){tmpPhoto=u;$('#pv').innerHTML=`<img src="${u}" alt="選択した写真">`}else{ui.draft.p=u;render()}}).catch(()=>toast('画像を読み込めませんでした'));
+    readImg(f).then(u=>{if(t.dataset.photo==='echo'){tmpPhoto=u;$('#pv').innerHTML=`<img src="${u}" alt="選択した写真">`}else{dayDraft.p=u;$('#dpv').innerHTML=pvHtml()}}).catch(()=>toast('画像を読み込めませんでした'));
   }
   else if(t.id==='imp'){
     const f=t.files[0];t.value='';if(!f)return;
