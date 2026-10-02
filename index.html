@@ -129,6 +129,13 @@ textarea.in{resize:vertical;line-height:1.6}
 .mp{margin:6px 0 0 38px;font-size:12.5px;color:var(--brown-d);background:var(--brown-l);border-radius:10px;padding:6px 10px;white-space:pre-wrap;word-break:break-all}
 .memo{margin:10px 0 0 38px;width:calc(100% - 38px);font-size:14px}
 .add{display:flex;gap:10px;margin-top:16px}
+.pinfo{margin:8px 0 0 38px}
+.pinfo .lims{display:flex;flex-wrap:wrap;gap:6px}
+.lim{font-size:11.5px;background:var(--bg2);color:var(--sub);padding:3px 10px;border-radius:99px;line-height:1.5}
+.lim.ok{background:var(--brown-l);color:var(--brown-d)}
+.lim.soon{background:#FFF1D6;color:#8A5A12;font-weight:700}
+.lim.late{background:var(--blue-l);color:var(--acc-ink);font-weight:700}
+.pinfo p{margin:6px 0 0;font-size:12.5px;color:var(--sub);line-height:1.65}
 
 /* timeline */
 .tl{position:relative;padding-left:24px;margin-top:6px}
@@ -294,18 +301,49 @@ function defaults(){
    'あると便利':['ベビーセンサー','電気ケトル','ウォーターサーバー','おしりふきウォーマー（冬生まれ）']
   };
   const mk=x=>({id:uid(),t:x,done:false,memo:''});
-  return{v:1,listVer:2,due:'',
+  return{v:1,listVer:2,due:'',birth:'',procs:procDefaults(),
    cats:Object.keys(L).map(n=>({id:uid(),name:n,items:L[n].map(mk)})),
    checkups:[],echoes:[],moods:{},diary:{},
    wishes:['マタニティフォト','ジェンダーリビール','ベビー服購入','名前決め','夫婦デート'].map(t=>({id:uid(),t,done:false}))};
+}
+function procDefaults(){
+  const G=[
+   ['出産前にやっておくと安心',[
+     ['必要書類のコピーをとって、クリアファイルにまとめる','','','申請ごとにファイルを分け、付箋に提出期限を書いておくと漏れにくい。'],
+     ['夫婦で「誰が・いつ・何を」するか役割分担を決める','','','例：出生届や子ども医療費助成はパパ、勤務先への申請はママ。'],
+     ['勤務先・健康保険組合に、申請の流れと必要書類を確認する','','','育休の給付金や出産手当金は、勤務先が申請書を用意することも。']
+   ]],
+   ['まずはここから（産後すみやかに）',[
+     ['出生届','出生した日を含めて14日以内','d13','赤ちゃんの誕生を市区町村に届け出る手続き。ママの入院中に進める家庭も多い。'],
+     ['児童手当の申請','原則、出生の日の翌日から15日以内','d15','遅れると、受け取れない月が出ることがある。'],
+     ['健康保険への加入申請','加入先によって異なる','','会社員・公務員は勤務先、国民健康保険は市区町村で申請。']
+   ]],
+   ['退院後、期限に合わせて進めたい手続き',[
+     ['子ども医療費助成の申請','自治体によって異なる','','対象年齢や内容は自治体ごとに違う。健康保険に加入したあとに申請することが多い。'],
+     ['出産手当金の申請','出産した日の翌日から2年以内','y2','勤務先の健康保険に加入していて、出産で休業し給与が出ない場合などが対象。'],
+     ['育児休業給付金の申請','勤務先の案内に従って申請','','多くは勤務先を通じてハローワークに申請。'],
+     ['出生時育児休業給付金の申請','勤務先の案内に従って申請','','産後パパ育休（出生時育児休業）を取った人が対象。申請は勤務先を通じて行う。'],
+     ['出生後休業支援給付金の申請','勤務先の案内に従って申請','','育児休業給付金などに上乗せされる制度。要件を満たす必要がある。'],
+     ['育児時短就業給付金の申請','勤務先の案内に従って申請','','2歳未満の子を育てるため時短勤務をする人が対象。']
+   ]],
+   ['忘れずに確認したい手続き',[
+     ['出産育児一時金','出産日の翌日から2年以内','y2','多くの医療機関は直接支払制度が使え、自分で申請しなくてよい場合も。出産予定の医療機関に確認。'],
+     ['高額療養費制度の利用申請','加入している健康保険の案内に従って申請','','帝王切開などで医療費が高額になったときに対象となる可能性。'],
+     ['民間医療保険の給付金請求','加入している保険会社の案内に従って申請','','入院や手術が対象になることがある。契約内容を確認。'],
+     ['医療費控除の申請','','','健診や出産費用、通院の交通費などが対象になることがある。領収書は保管。出産育児一時金などで補てんされた分は差し引く。'],
+     ['マイナンバーカードの申請','出生届と同時の申請がおすすめ','','出生届の提出と同時に申請できる。']
+   ]]
+  ];
+  return G.map(([name,items])=>({id:uid(),name,items:items.map(([t,limit,calc,note])=>({id:uid(),t,limit,calc,note,done:false,memo:''}))}));
 }
 function normalize(o){
   const d=defaults(); if(!o||typeof o!=='object') return d;
   const oldVer=o.listVer||1;
   const r=Object.assign(d,o);
-  ['cats','checkups','echoes','wishes'].forEach(k=>{if(!Array.isArray(r[k]))r[k]=d[k]});
+  ['cats','checkups','echoes','wishes','procs'].forEach(k=>{if(!Array.isArray(r[k]))r[k]=d[k]});
   ['moods','diary'].forEach(k=>{if(!r[k]||typeof r[k]!=='object'||Array.isArray(r[k]))r[k]={}});
   if(typeof r.due!=='string')r.due='';
+  if(typeof r.birth!=='string')r.birth='';
   if(oldVer<2){
     const done=new Set(),memo={};
     (Array.isArray(o.cats)?o.cats:[]).forEach(c=>(c.items||[]).forEach(i=>{if(i.done)done.add(i.t);if(i.memo)memo[i.t]=i.memo}));
@@ -371,33 +409,35 @@ function vHome(){
    <button class="tile-s" data-act="go" data-v="checkup"><span class="t">最近の健診</span><span class="v" style="font-size:22px">${last?jd(last.date,false):'―'}</span><span class="n">${last?(last.w!==''&&last.w!=null?`妊娠${last.w}週${last.d||0}日`:'記録あり'):'まだ記録がありません'}</span></button>
   </div>
   <button class="lrow" data-act="go" data-v="echo"><span class="ic c">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚</span></span>${ic('chev')}</button>
-  <button class="lrow" data-act="go" data-v="cal"><span class="ic d">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分（カレンダーから記録）</span></span>${ic('chev')}</button>`;
+  <button class="lrow" data-act="go" data-v="cal"><span class="ic d">${ic('book')}</span><span class="tt"><b>妊娠日記</b><span>${Object.keys(S.diary).length}日分（カレンダーから記録）</span></span>${ic('chev')}</button>
+  <button class="lrow" data-act="go" data-v="proc"><span class="ic">${ic('check')}</span><span class="tt"><b>出産後の手続き</b><span>${procStat().d} / ${procStat().t} 完了</span></span>${ic('chev')}</button>`;
 }
 
 /* --- prep --- */
-function itemRow(c,i){
+function itemRow(c,i,L='cats'){
   const m=ui.memo[i.id];
   return `<div class="it ${i.done?'done':''}"><div class="itm">
-   <button class="ck ${i.done?'on':''}" role="checkbox" aria-checked="${i.done}" aria-label="${esc(i.t)}" data-act="toggleItem" data-cat="${c.id}" data-id="${i.id}">${ic('check')}</button>
-   <span class="tx" data-act="toggleItem" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>
+   <button class="ck ${i.done?'on':''}" role="checkbox" aria-checked="${i.done}" aria-label="${esc(i.t)}" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('check')}</button>
+   <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>
    <button class="ib ${i.memo?'has':''}" aria-label="メモ" data-act="toggleMemo" data-id="${i.id}">${ic('pen')}</button>
-   <button class="ib" aria-label="削除" data-act="delItem" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
+   <button class="ib" aria-label="削除" data-act="delItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
+   ${L==='procs'?procExtra(i):''}
    ${i.memo&&!m?`<p class="mp">${esc(i.memo)}</p>`:''}
-   ${m?`<textarea class="in memo" rows="2" data-memo="${c.id}|${i.id}" placeholder="サイズ・色・購入先など">${esc(i.memo)}</textarea>`:''}</div>`;
+   ${m?`<textarea class="in memo" rows="2" data-memo="${L}|${c.id}|${i.id}" placeholder="サイズ・色・購入先など">${esc(i.memo)}</textarea>`:''}</div>`;
 }
-function catCard(c){
+function catCard(c,L='cats'){
   const d=c.items.filter(i=>i.done).length,t=c.items.length,p=t?Math.round(d/t*100):0,open=ui.open[c.id];
   return `<section class="card cat"><button class="cat-h" data-act="toggleCat" data-id="${c.id}" aria-expanded="${!!open}">
    <div><h3>${esc(c.name)}</h3><span class="sub">${d} / ${t} 完了</span></div><div class="pc">${p}%</div><span class="chev ${open?'up':''}">${ic('chev')}</span></button>${pb(p)}
-   ${open?`<div class="items">${c.items.map(i=>itemRow(c,i)).join('')}
-   <form class="add" data-form="addItem" data-cat="${c.id}"><input class="in" name="t" maxlength="40" placeholder="項目を追加" autocomplete="off" required><button class="btn sm">追加</button></form></div>`:''}</section>`;
+   ${open?`<div class="items">${c.items.map(i=>itemRow(c,i,L)).join('')}
+   <form class="add" data-form="addItem" data-list="${L}" data-cat="${c.id}"><input class="in" name="t" maxlength="40" placeholder="項目を追加" autocomplete="off" required><button class="btn sm">追加</button></form></div>`:''}</section>`;
 }
 function vPrep(){
   const s=prepStat();
   if(!ui.init){ui.init=1;if(S.cats[0])ui.open[S.cats[0].id]=1}
   return head('出産準備リスト','赤ちゃんを迎える準備をひとつずつ')+
   `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>全体の達成率</h3><span class="pc" style="font-size:28px">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p)}</div><span class="sub">${s.d} / ${s.t} 項目が完了</span></div>`+
-  S.cats.map(catCard).join('');
+  S.cats.map(c=>catCard(c,'cats')).join('');
 }
 
 /* --- checkup --- */
@@ -508,6 +548,34 @@ function daySheet(k){
    ${has?`<button type="button" class="btn-text danger" data-act="dayClear" data-date="${k}">この日の記録を消す</button>`:''}</form>`);
 }
 
+/* --- procedures (出産後の手続き) --- */
+function procStat(){let t=0,d=0;S.procs.forEach(c=>{t+=c.items.length;d+=c.items.filter(i=>i.done).length});return{t,d,p:t?Math.round(d/t*100):0}}
+function procCalc(i){
+  if(!S.birth||!i.calc)return '';
+  const[y,m,d]=S.birth.split('-').map(Number);
+  if(i.calc==='d13')return ymd(new Date(y,m-1,d+13));
+  if(i.calc==='d15')return ymd(new Date(y,m-1,d+15));
+  if(i.calc==='y2')return ymd(new Date(y+2,m-1,d));
+  return '';
+}
+function procExtra(i){
+  let h='';
+  if(i.limit)h+=`<span class="lim">期限：${esc(i.limit)}</span>`;
+  const dl=procCalc(i);
+  if(dl){const left=dn(dl)-dn(todayS());
+    h+=i.done?`<span class="lim ok">${jd(dl)}まで</span>`:`<span class="lim ${left<0?'late':left<=3?'soon':'ok'}">${jd(dl)}まで${left>=0?`（あと${left}日）`:'（期限を過ぎています）'}</span>`}
+  return (h||i.note)?`<div class="pinfo">${h?`<div class="lims">${h}</div>`:''}${i.note?`<p>${esc(i.note)}</p>`:''}</div>`:'';
+}
+function vProc(){
+  const s=procStat();
+  if(!ui.initP){ui.initP=1;S.procs.forEach(c=>ui.open[c.id]=1)}
+  return subHead('出産後の手続き','赤ちゃんが生まれたあとにやること')+
+  `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>全体の達成率</h3><span class="pc" style="font-size:28px">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p)}</div><span class="sub">${s.d} / ${s.t} 項目が完了</span></div>
+  <div class="card"><h3>出産日</h3><p class="note" style="margin:6px 0 12px">入力すると、期限のある手続きに「いつまで」が表示されます。</p><input class="in" type="date" data-birth value="${S.birth||''}" aria-label="出産日"></div>
+  <p class="note" style="margin:0 4px 16px">期限や条件は、自治体・勤務先・加入先によって異なります。必ず窓口や公式サイトでご確認ください。</p>`+
+  S.procs.map(c=>catCard(c,'procs')).join('');
+}
+
 /* --- wish --- */
 function vWish(){
   const s=wishStat();
@@ -521,6 +589,7 @@ function vWish(){
 function vMore(){
   return head('もっと','記録や設定')+
   `<button class="lrow" data-act="go" data-v="echo"><span class="ic c">${ic('img')}</span><span class="tt"><b>エコーアルバム</b><span>${S.echoes.length}枚の写真</span></span>${ic('chev')}</button>
+   <button class="lrow" data-act="go" data-v="proc"><span class="ic">${ic('check')}</span><span class="tt"><b>出産後の手続き</b><span>${procStat().d} / ${procStat().t} 完了</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="wish"><span class="ic">${ic('star')}</span><span class="tt"><b>やりたいことリスト</b><span>${wishStat().d} / ${wishStat().t} 達成</span></span>${ic('chev')}</button>
    <button class="lrow" data-act="go" data-v="data"><span class="ic b">${ic('save')}</span><span class="tt"><b>設定とバックアップ</b><span>予定日・書き出し・読み込み</span></span>${ic('chev')}</button>`;
 }
@@ -536,10 +605,10 @@ function vData(){
 }
 
 /* ===== render ===== */
-const VIEWS={home:vHome,prep:vPrep,checkup:vCheckup,cal:vCal,more:vMore,echo:vEcho,wish:vWish,data:vData};
+const VIEWS={home:vHome,prep:vPrep,checkup:vCheckup,cal:vCal,more:vMore,echo:vEcho,wish:vWish,proc:vProc,data:vData};
 function render(){
   $('#view').innerHTML=VIEWS[ui.view]();
-  const cur=['echo','wish','data'].includes(ui.view)?'more':ui.view;
+  const cur=['echo','wish','data','proc'].includes(ui.view)?'more':ui.view;
   const tabs=[['home','ホーム','home'],['prep','準備','list'],['checkup','健診','pulse'],['cal','カレンダー','cal'],['more','もっと','dots']];
   $('#nav').innerHTML=tabs.map(([v,l,i])=>`<button class="${cur===v?'on':''}" data-act="go" data-v="${v}" ${cur===v?'aria-current="page"':''}>${ic(i)}${l}</button>`).join('');
 }
@@ -550,9 +619,9 @@ const A={
  closeSheet:closeSheet,
  editDue:()=>sheet(`<h2>出産予定日</h2><form data-form="due"><input class="in" type="date" name="due" value="${S.due||''}" required aria-label="出産予定日"><button class="btn block" style="margin-top:14px">保存</button></form>`),
  toggleCat:d=>{ui.open[d.id]=!ui.open[d.id];render()},
- toggleItem:d=>{const i=S.cats.find(c=>c.id===d.cat)?.items.find(i=>i.id===d.id);if(i){i.done=!i.done;save();render()}},
+ toggleItem:d=>{const i=S[d.list||'cats'].find(c=>c.id===d.cat)?.items.find(i=>i.id===d.id);if(i){i.done=!i.done;save();render()}},
  toggleMemo:d=>{ui.memo[d.id]=!ui.memo[d.id];render()},
- delItem:d=>{const c=S.cats.find(c=>c.id===d.cat);const i=c?.items.find(i=>i.id===d.id);if(!i||!confirm(`「${i.t}」を削除しますか？`))return;c.items=c.items.filter(x=>x.id!==d.id);save();render()},
+ delItem:d=>{const c=S[d.list||'cats'].find(c=>c.id===d.cat);const i=c?.items.find(i=>i.id===d.id);if(!i||!confirm(`「${i.t}」を削除しますか？`))return;c.items=c.items.filter(x=>x.id!==d.id);save();render()},
  newCheckup:()=>checkupSheet(),
  editCheckup:d=>checkupSheet(S.checkups.find(c=>c.id===d.id)),
  delCheckup:d=>{if(!confirm('この健診記録を削除しますか？'))return;S.checkups=S.checkups.filter(c=>c.id!==d.id);save();closeSheet();render()},
@@ -578,7 +647,7 @@ const A={
 };
 const F={
  due:(f,fd)=>{S.due=fd.get('due');save();closeSheet();render();toast('予定日を保存しました')},
- addItem:(f,fd)=>{const t=(fd.get('t')||'').trim();const c=S.cats.find(c=>c.id===f.dataset.cat);if(!t||!c)return;c.items.push({id:uid(),t,done:false,memo:''});save();render()},
+ addItem:(f,fd)=>{const t=(fd.get('t')||'').trim();const c=S[f.dataset.list||'cats'].find(c=>c.id===f.dataset.cat);if(!t||!c)return;c.items.push({id:uid(),t,limit:'',calc:'',note:'',done:false,memo:''});save();render()},
  wish:(f,fd)=>{const t=(fd.get('t')||'').trim();if(!t)return;S.wishes.push({id:uid(),t,done:false});save();render()},
  checkup:(f,fd)=>{
   const o={id:fd.get('id')||uid(),date:fd.get('date')};['w','d','efw','bpd','fl','ac'].forEach(k=>o[k]=(fd.get(k)||'').trim());o.comment=(fd.get('comment')||'').trim();
@@ -603,12 +672,13 @@ document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-form]');if(!f)return;e.preventDefault();const fn=F[f.dataset.form];if(fn)fn(f,new FormData(f))});
 document.addEventListener('input',e=>{
   const t=e.target;
-  if(t.dataset.memo){const[c,i]=t.dataset.memo.split('|');const it=S.cats.find(x=>x.id===c)?.items.find(x=>x.id===i);if(it){it.memo=t.value;save()}}
+  if(t.dataset.memo){const[L,c,i]=t.dataset.memo.split('|');const it=S[L].find(x=>x.id===c)?.items.find(x=>x.id===i);if(it){it.memo=t.value;save()}}
   else if(t.matches('[data-q]')){ui.q=t.value;$('#dlist').innerHTML=dList()}
 });
 document.addEventListener('change',e=>{
   const t=e.target;
   if(t.matches('[data-gauto]')&&t.form){const g=gest(t.value);if(g){t.form.w.value=g.w;t.form.d.value=g.d}}
+  else if(t.matches('[data-birth]')){S.birth=t.value;save();render()}
   else if(t.dataset.photo){
     const f=t.files[0];if(!f)return;
     readImg(f).then(u=>{if(t.dataset.photo==='echo'){tmpPhoto=u;$('#pv').innerHTML=`<img src="${u}" alt="選択した写真">`}else{dayDraft.p=u;$('#dpv').innerHTML=pvHtml()}}).catch(()=>toast('画像を読み込めませんでした'));
