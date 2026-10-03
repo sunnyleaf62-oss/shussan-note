@@ -142,6 +142,9 @@ textarea.in{resize:vertical;line-height:1.6}
 .seg button{flex:1;text-align:center;padding:11px 6px;border-radius:12px;background:var(--bg2);font-weight:700;font-size:14px}
 .seg button.on{background:var(--blue-d);color:#4F2F33}
 .bought{flex:none;font-size:11px;font-weight:700;background:var(--brown-l);color:var(--brown-d);padding:2px 9px;border-radius:99px}
+.rcol{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
+.rcol .bought{font-size:10px;padding:0 9px;line-height:1.5}
+.rcol .pr-chip{font-size:10px;padding:0 4px 0 9px;line-height:1.5;min-height:0}
 .shop{margin:8px 0 0 38px;background:#FFF8F6;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .pr-chip{display:inline-flex;align-items:center;gap:0;flex:none;font-size:10.5px;font-weight:700;color:var(--acc-ink);background:var(--blue-l);border-radius:99px;padding:3px 5px 3px 9px;line-height:1.4;letter-spacing:.02em}
 .pr-chip svg.i{width:13px;height:13px;stroke-width:2.6;transition:transform .2s}
@@ -497,8 +500,7 @@ function itemRow(c,i,L='cats'){
   const m=ui.memo[i.id];
   return `<div class="it ${i.done?'done':''}"><div class="itm">
    <button class="ck ${i.done?'on':''}" role="checkbox" aria-checked="${i.done}" aria-label="${esc(i.t)}" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('check')}</button>
-   <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>${L==='cats'&&i.done?'<span class="bought">購入済み</span>':''}
-   ${L==='cats'&&prodList(i.t).length?`<button class="pr-chip ${ui.shop[i.id]?'on':''}" aria-expanded="${!!ui.shop[i.id]}" aria-label="おすすめ商品（PR）を${ui.shop[i.id]?'閉じる':'見る'}" data-act="toggleShop" data-id="${i.id}">人気商品${ic('chev')}</button>`:''}
+   <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>${L==='cats'&&(i.done||prodList(i.t).length)?`<span class="rcol">${L==='cats'&&i.done?'<span class="bought">購入済み</span>':''}${L==='cats'&&prodList(i.t).length?`<button class="pr-chip ${ui.shop[i.id]?'on':''}" aria-expanded="${!!ui.shop[i.id]}" aria-label="おすすめ商品（PR）を${ui.shop[i.id]?'閉じる':'見る'}" data-act="toggleShop" data-id="${i.id}">人気商品${ic('chev')}</button>`:''}</span>`:''}
    <button class="ib ${i.memo?'has':''}" aria-label="メモ" data-act="toggleMemo" data-id="${i.id}">${ic('pen')}</button>
    <button class="ib" aria-label="削除" data-act="delItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
    ${L==='procs'?procExtra(i):''}${L==='cats'&&ui.shop[i.id]?shopHtml(i):''}

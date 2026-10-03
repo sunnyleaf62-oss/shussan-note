@@ -1,6 +1,6 @@
 // 出産準備ノート Service Worker
 // index.html を更新したら VERSION を上げてください
-const VERSION = 'shussan-note-v16';
+const VERSION = 'shussan-note-v17';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './products.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './favicon-32.png'];
 
 self.addEventListener('install', (e) => {
