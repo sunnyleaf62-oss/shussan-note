@@ -1,0 +1,89 @@
+{
+  "updated": "2026年10月",
+  "_readme": "items の中に、出産準備リストの項目名をキーにして商品を追加します（項目名は同じ文字で）。rakuten=楽天のリンク、amazon=Amazonのリンク（どちらか片方だけでもOK）。使えるリンクは https から始まる rakuten.co.jp / r10.to / amazon.co.jp / amzn.to / amzn.asia / a.co / link.amazon のものです。リンクのない商品は表示されません。1項目に最大3つまで。rating=星の数、count=レビュー件数、ratingFrom=評価の出どころ（例：楽天）。updated に評価を確認した時期（例：2026年10月）を入れると、ページに表示されます。",
+  "_example": {
+    "チャイルドシート": [
+      {
+        "label": "ママの人気商品",
+        "name": "商品名",
+        "rating": 4.7,
+        "count": 1234,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/xxxxxxxx",
+        "amazon": "https://amzn.to/xxxxxxx"
+      }
+    ]
+  },
+  "items": {
+    "ベビーベッド": [
+      {
+        "name": "ネオママイズム　ベッドインベッド",
+        "rating": 4.52,
+        "count": 1624,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/55791072.b378df4d.55791073.23f773ff/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fneomamaism%2Fnb21bbdg%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B0eqAM1ZJ"
+      }
+    ],
+    "消毒ケースまたは乾燥器": [
+      {
+        "name": "Pigeon ポチット",
+        "rating": 4.7,
+        "count": 850,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/53aefbb3.de8a4171.53aefbb9.3280b782/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpigeon-shop%2F1030195%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B03OlVR2O"
+      }
+    ],
+    "哺乳びん洗剤": [
+      {
+        "name": "Pigeon 泡スプレー",
+        "rating": 4.75,
+        "count": 12,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/53bc99bb.220e3402.53bc99bc.f3687ed3/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F4902508002172%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B0cFzlA3d"
+      }
+    ],
+    "おくるみ": [
+      {
+        "name": "エイデンアンドアネイ公式 オーガニックスワドル",
+        "rating": 4.64,
+        "count": 28,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/549840b9.0bad800f.549840ba.9ad100ca/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fadenandanais%2Faswo20006%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B0aaNCVsN"
+      }
+    ],
+    "おむつ替えシート": [
+      {
+        "name": "PUPPAPUPO イブル モロッカン",
+        "rating": 4.69,
+        "count": 116,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/54793d69.5d536119.54793d6a.d58bc227/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fponopono%2F102622%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B0c9K27lP"
+      }
+    ],
+    "骨盤ベルト": [
+      {
+        "name": "Pigeon 骨盤ベルト(履くタイプ)",
+        "rating": 4.48,
+        "count": 1247,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/53aefbb3.de8a4171.53aefbb9.3280b782/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpigeon-shop%2F1038571%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B08bLd2nR"
+      }
+    ],
+    "授乳ブラ": [
+      {
+        "name": "Marine Blue 授乳ブラ",
+        "rating": 4.17,
+        "count": 1127,
+        "ratingFrom": "楽天",
+        "rakuten": "https://hb.afl.rakuten.co.jp/ichiba/53aeefcc.89fe2ad9.53aeefd8.363acbd5/_RTLink148506?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarine-blue%2Fladies237%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+        "amazon": "https://link.amazon/B063gEzLf"
+      }
+    ]
+  }
+}
