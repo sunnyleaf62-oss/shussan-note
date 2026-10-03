@@ -129,6 +129,18 @@ textarea.in{resize:vertical;line-height:1.6}
 .mp{margin:6px 0 0 38px;font-size:12.5px;color:var(--brown-d);background:var(--brown-l);border-radius:10px;padding:6px 10px;white-space:pre-wrap;word-break:break-all}
 .memo{margin:10px 0 0 38px;width:calc(100% - 38px);font-size:14px}
 .add{display:flex;gap:10px;margin-top:16px}
+.preg-chip{display:inline-flex;align-items:center;gap:4px;margin:-8px 0 14px;background:var(--blue-l);color:var(--acc-ink);font-weight:700;font-size:13px;padding:6px 8px 6px 14px;border-radius:99px}
+.preg-chip small{font-weight:600;font-size:11px;opacity:.8}
+.preg-chip svg.i{width:15px;height:15px;transform:rotate(90deg)}
+.pn{display:inline-block;margin-left:8px;background:var(--blue-l);color:var(--acc-ink);border-radius:99px;padding:0 10px;font-size:11.5px;font-weight:700;line-height:1.6}
+.preg-b{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;border-radius:16px;background:var(--bg2);margin-bottom:10px}
+.preg-b b{display:block;font-size:15px}
+.preg-b small{color:var(--sub);font-size:12px}
+.preg-b.on{box-shadow:inset 0 0 0 2px var(--blue-d);background:var(--blue-l)}
+.preg-b svg.i{color:var(--blue-d)}
+.seg{display:flex;gap:8px;margin-top:12px}
+.seg button{flex:1;text-align:center;padding:11px 6px;border-radius:12px;background:var(--bg2);font-weight:700;font-size:14px}
+.seg button.on{background:var(--blue-d);color:#4F2F33}
 .bought{flex:none;font-size:11px;font-weight:700;background:var(--brown-l);color:var(--brown-d);padding:2px 9px;border-radius:99px}
 .shop{margin:8px 0 0 38px;background:#FFF8F6;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .pr-chip{display:inline-flex;align-items:center;gap:0;flex:none;font-size:10.5px;font-weight:700;color:var(--acc-ink);background:var(--blue-l);border-radius:99px;padding:3px 5px 3px 9px;line-height:1.4;letter-spacing:.02em}
@@ -194,8 +206,8 @@ textarea.in{resize:vertical;line-height:1.6}
 .mh button svg.i{width:18px;height:18px}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .cal .w{text-align:center;font-size:11px;color:var(--sub);padding-bottom:4px}
-.cal .w:first-child{color:#C07C78}
-.cal .w:last-child{color:#5E9BB0}
+.cal .w.sun{color:#C07C78}
+.cal .w.sat{color:#5E9BB0}
 .cal button,.cal i{aspect-ratio:1/1.34;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:var(--serif);font-size:15px;line-height:1.1;background:var(--bg2);padding:0;position:relative;min-width:0}
 .cal button small{font-size:9.5px;opacity:.72;letter-spacing:-.02em;font-family:var(--sans)}
 .cal button small.wk0{opacity:1;font-weight:700}
@@ -371,9 +383,19 @@ function normalize(o){
   r.listVer=2;
   return r;
 }
-function load(){try{const t=localStorage.getItem(KEY);return t?normalize(JSON.parse(t)):defaults()}catch(e){return defaults()}}
-let S=load();
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S));return true}catch(e){toast('端末の保存容量がいっぱいです。写真を整理してください');return false}}
+function newRoot(){const id=uid();return{v:2,cur:id,weekStart:0,list:[{id,name:'1人目',data:defaults()}]}}
+function normRoot(o){
+  if(o&&Array.isArray(o.list)&&o.list.length){
+    const list=o.list.map((p,i)=>({id:(p&&p.id)||uid(),name:String((p&&p.name)||`${i+1}人目`).slice(0,20),data:normalize(p&&p.data)}));
+    return{v:2,cur:list.some(p=>p.id===o.cur)?o.cur:list[0].id,weekStart:o.weekStart===1?1:0,list};
+  }
+  const id=uid();return{v:2,cur:id,weekStart:0,list:[{id,name:'1人目',data:normalize(o)}]};
+}
+function load(){try{const t=localStorage.getItem(KEY);return t?normRoot(JSON.parse(t)):newRoot()}catch(e){return newRoot()}}
+let ROOT=load();
+const curP=()=>ROOT.list.find(p=>p.id===ROOT.cur);
+let S=curP().data;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ROOT));return true}catch(e){toast('端末の保存容量がいっぱいです。写真を整理してください');return false}}
 save();
 
 /* ===== pregnancy calc ===== */
@@ -396,7 +418,8 @@ function wishStat(){const t=S.wishes.length,d=S.wishes.filter(w=>w.done).length;
 function monthMoods(Y,M){const out=[];const dim=new Date(Y,M+1,0).getDate();for(let d=1;d<=dim;d++){out.push(S.moods[`${Y}-${pad(M+1)}-${pad(d)}`]||0)}return out}
 
 /* ===== views ===== */
-function head(t,s){return `<header class="ph"><h1>${t}</h1>${s?`<p>${s}</p>`:''}</header>`}
+function head(t,s){const nm=(ROOT.list.length>1&&t!=='ママノート')?`<span class="pn">${esc(curP().name)}</span>`:'';return `<header class="ph"><h1>${t}</h1>${(s||nm)?`<p>${s||''}${nm}</p>`:''}</header>`}
+const pregChip=()=>`<button class="preg-chip" data-act="pregSheet" aria-label="妊娠の切り替え">${esc(curP().name)}${ROOT.list.length>1?`<small>全${ROOT.list.length}件</small>`:''}${ic('chev')}</button>`;
 function subHead(t,s){return `<button class="back" data-act="go" data-v="more">${ic('back')}もっと</button>${head(t,s)}`}
 
 function vHome(){
@@ -419,7 +442,7 @@ function vHome(){
   const now=new Date();const mv=monthMoods(now.getFullYear(),now.getMonth()).filter(Boolean);
   const avg=mv.length?mv.reduce((a,b)=>a+b,0)/mv.length:0;
   const last=[...S.checkups].sort((a,b)=>b.date.localeCompare(a.date))[0];
-  return head('ママノート',jd(t))+hero+`
+  return head('ママノート',jd(t))+pregChip()+hero+`
   <div class="grid2">
    <button class="tile-s" data-act="go" data-v="prep"><span class="t">出産準備</span><span class="v">${ps.p}<small>%</small></span>${pb(ps.p)}<span class="n">${ps.d} / ${ps.t} 完了</span></button>
    <button class="tile-s" data-act="go" data-v="wish"><span class="t">やりたいこと</span><span class="v">${ws.p}<small>%</small></span>${pb(ws.p,'br')}<span class="n">${ws.d} / ${ws.t} 達成</span></button>
@@ -563,8 +586,8 @@ function dList(){
 }
 function vCal(){
   if(!ui.ym){const n=new Date();ui.ym=[n.getFullYear(),n.getMonth()]}
-  const[Y,M]=ui.ym,first=new Date(Y,M,1).getDay(),dim=new Date(Y,M+1,0).getDate(),t=todayS();
-  let cells=WD.map(w=>`<div class="w">${w}</div>`).join('')+'<i></i>'.repeat(first);
+  const[Y,M]=ui.ym,first=(new Date(Y,M,1).getDay()-ROOT.weekStart+7)%7,dim=new Date(Y,M+1,0).getDate(),t=todayS();
+  let cells=(ROOT.weekStart?[...WD.slice(1),WD[0]]:WD).map(w=>`<div class="w ${w==='日'?'sun':w==='土'?'sat':''}">${w}</div>`).join('')+'<i></i>'.repeat(first);
   for(let d=1;d<=dim;d++){
     const k=`${Y}-${pad(M+1)}-${pad(d)}`,v=S.moods[k],g=gest(k),has=S.diary[k];
     cells+=`<button class="${k===t?'td':''}" data-act="pickDay" data-date="${k}" aria-label="${M+1}月${d}日${g?' 妊娠'+g.w+'週'+g.d+'日':''} ${v?MOODS[v-1].n:''}${has?' 日記あり':''}" ${v?`style="background:${MOODS[v-1].c};color:#4F3F42"`:''}>${d}${g?`<small class="${g.d===0?'wk0':''}">${g.w}w${g.d}d</small>`:''}${has?'<s></s>':''}</button>`;
@@ -651,9 +674,11 @@ function vMore(){
    <button class="lrow" data-act="go" data-v="data"><span class="ic b">${ic('save')}</span><span class="tt"><b>設定とバックアップ</b><span>予定日・書き出し・読み込み</span></span>${ic('chev')}</button>`;
 }
 function vData(){
-  const kb=Math.round(new Blob([JSON.stringify(S)]).size/1024);
+  const kb=Math.round(new Blob([JSON.stringify(ROOT)]).size/1024);
   return subHead('設定とバックアップ')+
-  `<div class="card"><h3>出産予定日</h3><p class="sub" style="margin:6px 0 14px">${S.due?jd(S.due):'未設定'}</p><button class="btn ghost" data-act="editDue">予定日を変更</button></div>
+  `<div class="card"><h3>妊娠の管理</h3><p class="sub" style="margin:6px 0 14px">いま：${esc(curP().name)}（全${ROOT.list.length}件）</p><button class="btn ghost" data-act="pregSheet">切り替え・追加</button></div>
+   <div class="card"><h3>カレンダーの週の始まり</h3><div class="seg"><button class="${ROOT.weekStart?'':'on'}" data-act="setWeek" data-v="0">日曜はじまり</button><button class="${ROOT.weekStart?'on':''}" data-act="setWeek" data-v="1">月曜はじまり</button></div></div>
+   <div class="card"><h3>出産予定日（いまの妊娠）</h3><p class="sub" style="margin:6px 0 14px">${S.due?jd(S.due):'未設定'}</p><button class="btn ghost" data-act="editDue">予定日を変更</button></div>
    <div class="card"><h3>バックアップ</h3><p class="note" style="margin-top:6px">データはこの端末の中だけに保存されています。機種変更やブラウザのデータ削除に備えて、ときどき書き出しておくと安心です。</p>
    <div class="stack" style="margin-top:14px"><button class="btn block" data-act="exportData">JSONを書き出す</button><button class="btn ghost block" data-act="importData">JSONを読み込む</button></div>
    <p class="note">現在のデータ量：約${kb.toLocaleString()}KB</p></div>
@@ -671,8 +696,22 @@ function render(){
 }
 
 /* ===== actions ===== */
+function setCur(id){ROOT.cur=id;S=curP().data;ui.open={};ui.memo={};ui.shop={};ui.init=0;ui.initP=0;ui.q='';ui.draft=null;save()}
+function pregSheet(){
+  sheet(`<h2>妊娠の切り替え</h2>
+  ${ROOT.list.map(p=>`<button class="preg-b ${p.id===ROOT.cur?'on':''}" data-act="switchPreg" data-id="${p.id}"><span><b>${esc(p.name)}</b><small>${p.data.due?'予定日 '+jd(p.data.due):'予定日 未設定'}</small></span>${p.id===ROOT.cur?ic('check'):''}</button>`).join('')}
+  <button class="btn ghost block" data-act="addPreg" style="margin-top:6px">＋ 次の妊娠を追加</button>
+  <button class="btn-text" data-act="renamePreg">いまの名前を変える</button>
+  ${ROOT.list.length>1?`<button class="btn-text danger" data-act="delPreg">いまの妊娠の記録を削除</button>`:''}`);
+}
 const A={
  go:d=>go(d.v),
+ pregSheet:()=>pregSheet(),
+ switchPreg:d=>{setCur(d.id);closeSheet();go('home');toast(curP().name+'に切り替えました')},
+ addPreg:()=>{const n=ROOT.list.length+1;if(!confirm(`${n}人目の記録を、新しく始めます。\n${curP().name}の記録は、そのまま残ります。`))return;const id=uid();ROOT.list.push({id,name:`${n}人目`,data:defaults()});setCur(id);closeSheet();go('home');toast(`${n}人目を追加しました`)},
+ renamePreg:()=>sheet(`<h2>名前を変える</h2><form data-form="renamePreg"><input class="in" name="name" maxlength="20" value="${esc(curP().name)}" required aria-label="名前"><button class="btn block" style="margin-top:14px">保存</button></form>`),
+ delPreg:()=>{if(ROOT.list.length<2)return;const p=curP();if(!confirm(`「${p.name}」の記録をすべて削除します。この操作は取り消せません。`))return;if(!confirm('本当に削除しますか？（先にバックアップをおすすめします）'))return;ROOT.list=ROOT.list.filter(x=>x.id!==p.id);setCur(ROOT.list[0].id);closeSheet();go('home');toast('削除しました')},
+ setWeek:d=>{ROOT.weekStart=+d.v===1?1:0;save();render()},
  closeSheet:closeSheet,
  editDue:()=>sheet(`<h2>出産予定日</h2><form data-form="due"><input class="in" type="date" name="due" value="${S.due||''}" required aria-label="出産予定日"><button class="btn block" style="margin-top:14px">保存</button></form>`),
  toggleCat:d=>{ui.open[d.id]=!ui.open[d.id];render()},
@@ -696,14 +735,15 @@ const A={
  toggleWish:d=>{const w=S.wishes.find(w=>w.id===d.id);if(w){w.done=!w.done;save();render()}},
  delWish:d=>{const w=S.wishes.find(w=>w.id===d.id);if(!w||!confirm(`「${w.t}」を削除しますか？`))return;S.wishes=S.wishes.filter(x=>x.id!==d.id);save();render()},
  exportData:async()=>{
-  const name=`mama-note-${todayS()}.json`,file=new File([JSON.stringify(S)],name,{type:'application/json'});
+  const name=`mama-note-${todayS()}.json`,file=new File([JSON.stringify(ROOT)],name,{type:'application/json'});
   if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'ママノート バックアップ'});return}catch(e){if(e.name==='AbortError')return}}
   const url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('書き出しました');
  },
  importData:()=>$('#imp').click(),
- resetAll:()=>{if(!confirm('すべてのデータを削除します。この操作は取り消せません。'))return;if(!confirm('本当に削除しますか？（先にバックアップをおすすめします）'))return;S=defaults();ui.open={};ui.memo={};ui.init=0;ui.draft=null;save();render();toast('初期状態に戻しました')}
+ resetAll:()=>{if(!confirm('すべてのデータを削除します。この操作は取り消せません。'))return;if(!confirm('本当に削除しますか？（先にバックアップをおすすめします）'))return;ROOT=newRoot();S=curP().data;ui.open={};ui.memo={};ui.shop={};ui.init=0;ui.initP=0;ui.draft=null;save();render();toast('初期状態に戻しました')}
 };
 const F={
+ renamePreg:(f,fd)=>{const n=(fd.get('name')||'').trim().slice(0,20);if(!n)return;curP().name=n;save();closeSheet();render();toast('名前を変更しました')},
  due:(f,fd)=>{S.due=fd.get('due');save();closeSheet();render();toast('予定日を保存しました')},
  addItem:(f,fd)=>{const t=(fd.get('t')||'').trim();const c=S[f.dataset.list||'cats'].find(c=>c.id===f.dataset.cat);if(!t||!c)return;c.items.push({id:uid(),t,limit:'',calc:'',note:'',done:false,memo:''});save();render()},
  wish:(f,fd)=>{const t=(fd.get('t')||'').trim();if(!t)return;S.wishes.push({id:uid(),t,done:false});save();render()},
@@ -745,9 +785,11 @@ document.addEventListener('change',e=>{
     const f=t.files[0];t.value='';if(!f)return;
     f.text().then(txt=>{
       let o;try{o=JSON.parse(txt)}catch(e){toast('JSONを読み込めませんでした');return}
-      if(!o||!Array.isArray(o.cats)){toast('このファイルは使えません');return}
-      if(!confirm('現在のデータをこのファイルの内容に置き換えます。よろしいですか？'))return;
-      S=normalize(o);ui.open={};ui.memo={};ui.init=0;ui.draft=null;save();render();toast('読み込みました');
+      const multi=!!(o&&Array.isArray(o.list));
+      if(!o||(!multi&&!Array.isArray(o.cats))){toast('このファイルは使えません');return}
+      if(!confirm(multi?'いまのデータをすべて、このファイルの内容に置き換えます。よろしいですか？':'いまの妊娠のデータを、このファイルの内容に置き換えます。よろしいですか？'))return;
+      if(multi){ROOT=normRoot(o)}else{curP().data=normalize(o)}
+      S=curP().data;ui.open={};ui.memo={};ui.shop={};ui.init=0;ui.initP=0;ui.draft=null;save();render();toast('読み込みました');
     });
   }
 });
