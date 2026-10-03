@@ -129,6 +129,21 @@ textarea.in{resize:vertical;line-height:1.6}
 .mp{margin:6px 0 0 38px;font-size:12.5px;color:var(--brown-d);background:var(--brown-l);border-radius:10px;padding:6px 10px;white-space:pre-wrap;word-break:break-all}
 .memo{margin:10px 0 0 38px;width:calc(100% - 38px);font-size:14px}
 .add{display:flex;gap:10px;margin-top:16px}
+.bought{flex:none;font-size:11px;font-weight:700;background:var(--brown-l);color:var(--brown-d);padding:2px 9px;border-radius:99px}
+.shop{margin:10px 0 0 38px;background:#FFF8F6;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.shop-t{display:flex;align-items:center;gap:8px}
+.shop-l{font-size:12px;font-weight:700;color:var(--acc-ink)}
+.shop-pr{font-size:10px;color:var(--sub);border:1px solid var(--line);border-radius:6px;padding:0 5px;line-height:1.5}
+.shop-n{font-size:13px;margin-top:6px;line-height:1.5}
+.shop-r{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.stars{color:#E9B44C;font-size:14px;letter-spacing:1px}
+.stars i{font-style:normal;color:#EADFD6}
+.shop-r b{font-family:var(--serif);font-size:15px}
+.shop-r small{font-size:11px;color:var(--sub)}
+.shop-btns{display:flex;gap:8px;margin-top:10px}
+.shop-b{flex:1;text-align:center;border-radius:12px;padding:11px 6px;font-size:13px;font-weight:700;text-decoration:none;color:#4F2F33;background:var(--blue-d)}
+.shop-b.rk{background:#EDBFBF}
+.shop-b.am{background:#B4D9E2}
 .pinfo{margin:8px 0 0 38px}
 .pinfo .lims{display:flex;flex-wrap:wrap;gap:6px}
 .lim{font-size:11.5px;background:var(--bg2);color:var(--sub);padding:3px 10px;border-radius:99px;line-height:1.5}
@@ -414,14 +429,52 @@ function vHome(){
 }
 
 /* --- prep --- */
+/* --- products (楽天リンク。products.json から読み込み) --- */
+let PRODUCTS={updated:'',items:{}};
+try{const c=localStorage.getItem('mama-products');if(c)PRODUCTS=JSON.parse(c)}catch(e){}
+const RK_RE=/^https:\/\/([a-z0-9-]+\.)*(rakuten\.co\.jp|r10\.to)\//i;
+const AM_RE=/^https:\/\/([a-z0-9-]+\.)*(amazon\.co\.jp|amzn\.to|amzn\.asia|a\.co)\//i;
+function prodList(name){
+  let v=PRODUCTS&&PRODUCTS.items&&PRODUCTS.items[name];
+  if(location.hash==='#demo'&&name==='チャイルドシート')v=[{name:'サンプル商品A（表示確認用）',rating:4.7,count:1234,ratingFrom:'楽天',rakuten:'https://www.rakuten.co.jp/',amazon:'https://www.amazon.co.jp/'},{name:'サンプル商品B（表示確認用）',rating:4.5,rakuten:'https://www.rakuten.co.jp/'}];
+  if(!v)return[];
+  return(Array.isArray(v)?v:[v]).map(p=>p&&Object.assign({},p,{rk:RK_RE.test(p.rakuten||p.url||'')?(p.rakuten||p.url):'',am:AM_RE.test(p.amazon||'')?p.amazon:''})).filter(p=>p&&(p.rk||p.am)).slice(0,3);
+}
+function hasProducts(){return S.cats.some(c=>c.items.some(i=>prodList(i.t).length))}
+function shopHtml(i){
+  return prodList(i.t).map(p=>{
+    const r=parseFloat(p.rating),has=r>0,full=has?Math.min(5,Math.round(r)):0;
+    return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(p.label||'ママの人気商品')}</span><span class="shop-pr">PR</span></div>
+    ${p.name?`<div class="shop-n">${esc(p.name)}</div>`:''}
+    ${has?`<div class="shop-r"><span class="stars" aria-label="評価${r}">${'★'.repeat(full)}<i>${'★'.repeat(5-full)}</i></span><b>${r.toFixed(1)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}
+    <div class="shop-btns">${p.rk?`<a class="shop-b rk" href="${esc(p.rk)}" target="_blank" rel="noopener noreferrer sponsored">楽天で見る</a>`:''}${p.am?`<a class="shop-b am" href="${esc(p.am)}" target="_blank" rel="noopener noreferrer sponsored">Amazonで見る</a>`:''}</div></div>`}).join('');
+}
+function shopNote(){
+  if(!hasProducts())return '';
+  const all=S.cats.flatMap(c=>c.items.flatMap(i=>prodList(i.t)));
+  const shops=[all.some(p=>p.rk)?'楽天市場':'',all.some(p=>p.am)?'Amazon':''].filter(Boolean).join('・');
+  return `<p class="note" style="margin:0 4px 16px">「PR」の表示がある商品リンクには、アフィリエイト広告（${shops}）が含まれます。${all.some(p=>p.am)?'Amazonのアソシエイトとして、適格販売により収入を得ています。':''}${PRODUCTS.updated?`星の評価は${esc(PRODUCTS.updated)}時点のレビュー平均です。`:''}</p>`;
+}
+function loadProducts(){
+  try{
+    if(typeof fetch!=='function'||!/^https?:$/.test(location.protocol))return;
+    fetch('products.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{
+      if(!j||typeof j.items!=='object')return;
+      const a=JSON.stringify(j);if(a===JSON.stringify(PRODUCTS))return;
+      PRODUCTS=j;try{localStorage.setItem('mama-products',a)}catch(e){}
+      if(ui.view==='prep'&&!document.activeElement?.matches?.('textarea,input'))render();
+    }).catch(()=>{});
+  }catch(e){}
+}
+
 function itemRow(c,i,L='cats'){
   const m=ui.memo[i.id];
   return `<div class="it ${i.done?'done':''}"><div class="itm">
    <button class="ck ${i.done?'on':''}" role="checkbox" aria-checked="${i.done}" aria-label="${esc(i.t)}" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('check')}</button>
-   <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>
+   <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>${L==='cats'&&i.done?'<span class="bought">購入済み</span>':''}
    <button class="ib ${i.memo?'has':''}" aria-label="メモ" data-act="toggleMemo" data-id="${i.id}">${ic('pen')}</button>
    <button class="ib" aria-label="削除" data-act="delItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
-   ${L==='procs'?procExtra(i):''}
+   ${L==='procs'?procExtra(i):''}${L==='cats'?shopHtml(i):''}
    ${i.memo&&!m?`<p class="mp">${esc(i.memo)}</p>`:''}
    ${m?`<textarea class="in memo" rows="2" data-memo="${L}|${c.id}|${i.id}" placeholder="サイズ・色・購入先など">${esc(i.memo)}</textarea>`:''}</div>`;
 }
@@ -437,7 +490,7 @@ function vPrep(){
   if(!ui.init){ui.init=1;if(S.cats[0])ui.open[S.cats[0].id]=1}
   return head('出産準備リスト','赤ちゃんを迎える準備をひとつずつ')+
   `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>全体の達成率</h3><span class="pc" style="font-size:28px">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p)}</div><span class="sub">${s.d} / ${s.t} 項目が完了</span></div>`+
-  S.cats.map(c=>catCard(c,'cats')).join('');
+  shopNote()+S.cats.map(c=>catCard(c,'cats')).join('');
 }
 
 /* --- checkup --- */
@@ -699,6 +752,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('#lb').classLi
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 render();
+loadProducts();
 </script>
 </body>
 </html>
