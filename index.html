@@ -136,8 +136,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .shop-pr{font-size:10px;color:var(--sub);border:1px solid var(--line);border-radius:6px;padding:0 5px;line-height:1.5}
 .shop-n{font-size:13px;margin-top:6px;line-height:1.5}
 .shop-r{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
-.stars{color:#E9B44C;font-size:14px;letter-spacing:1px}
-.stars i{font-style:normal;color:#EADFD6}
+.stars{font-size:15px;letter-spacing:1px;color:transparent;background:linear-gradient(90deg,#E9B44C var(--p),#EADFD6 var(--p));-webkit-background-clip:text;background-clip:text}
 .shop-r b{font-family:var(--serif);font-size:15px}
 .shop-r small{font-size:11px;color:var(--sub)}
 .shop-btns{display:flex;gap:8px;margin-top:10px}
@@ -433,7 +432,7 @@ function vHome(){
 let PRODUCTS={updated:'',items:{}};
 try{const c=localStorage.getItem('mama-products');if(c)PRODUCTS=JSON.parse(c)}catch(e){}
 const RK_RE=/^https:\/\/([a-z0-9-]+\.)*(rakuten\.co\.jp|r10\.to)\//i;
-const AM_RE=/^https:\/\/([a-z0-9-]+\.)*(amazon\.co\.jp|amzn\.to|amzn\.asia|a\.co)\//i;
+const AM_RE=/^https:\/\/([a-z0-9-]+\.)*(amazon\.co\.jp|amzn\.to|amzn\.asia|a\.co|link\.amazon)\//i;
 function prodList(name){
   let v=PRODUCTS&&PRODUCTS.items&&PRODUCTS.items[name];
   if(location.hash==='#demo'&&name==='チャイルドシート')v=[{name:'サンプル商品A（表示確認用）',rating:4.7,count:1234,ratingFrom:'楽天',rakuten:'https://www.rakuten.co.jp/',amazon:'https://www.amazon.co.jp/'},{name:'サンプル商品B（表示確認用）',rating:4.5,rakuten:'https://www.rakuten.co.jp/'}];
@@ -446,14 +445,14 @@ function shopHtml(i){
     const r=parseFloat(p.rating),has=r>0,full=has?Math.min(5,Math.round(r)):0;
     return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(p.label||'ママの人気商品')}</span><span class="shop-pr">PR</span></div>
     ${p.name?`<div class="shop-n">${esc(p.name)}</div>`:''}
-    ${has?`<div class="shop-r"><span class="stars" aria-label="評価${r}">${'★'.repeat(full)}<i>${'★'.repeat(5-full)}</i></span><b>${r.toFixed(1)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}
+    ${has?`<div class="shop-r"><span class="stars" style="--p:${(r/5*100).toFixed(1)}%" aria-label="評価${r}">★★★★★</span><b>${r.toFixed(2)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}
     <div class="shop-btns">${p.rk?`<a class="shop-b rk" href="${esc(p.rk)}" target="_blank" rel="noopener noreferrer sponsored">楽天で見る</a>`:''}${p.am?`<a class="shop-b am" href="${esc(p.am)}" target="_blank" rel="noopener noreferrer sponsored">Amazonで見る</a>`:''}</div></div>`}).join('');
 }
 function shopNote(){
   if(!hasProducts())return '';
   const all=S.cats.flatMap(c=>c.items.flatMap(i=>prodList(i.t)));
   const shops=[all.some(p=>p.rk)?'楽天市場':'',all.some(p=>p.am)?'Amazon':''].filter(Boolean).join('・');
-  return `<p class="note" style="margin:0 4px 16px">「PR」の表示がある商品リンクには、アフィリエイト広告（${shops}）が含まれます。${all.some(p=>p.am)?'Amazonのアソシエイトとして、適格販売により収入を得ています。':''}${PRODUCTS.updated?`星の評価は${esc(PRODUCTS.updated)}時点のレビュー平均です。`:''}</p>`;
+  return `<p class="note" style="margin:0 4px 16px">「PR」の表示がある商品リンクには、アフィリエイト広告（${shops}）が含まれます。${all.some(p=>p.am)?'Amazonのアソシエイトとして、ママノートは適格販売により収入を得ています。':''}${PRODUCTS.updated?`星の評価は${esc(PRODUCTS.updated)}時点のレビュー平均です。`:''}</p>`;
 }
 function loadProducts(){
   try{
