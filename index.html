@@ -131,7 +131,11 @@ textarea.in{resize:vertical;line-height:1.6}
 .add{display:flex;gap:10px;margin-top:16px}
 .bought{flex:none;font-size:11px;font-weight:700;background:var(--brown-l);color:var(--brown-d);padding:2px 9px;border-radius:99px}
 .shop{margin:8px 0 0 38px;background:#FFF8F6;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
-.shop-t{display:flex;align-items:center;gap:6px}
+.pr-chip{display:inline-flex;align-items:center;gap:0;flex:none;font-size:10.5px;font-weight:700;color:var(--acc-ink);background:var(--blue-l);border-radius:99px;padding:3px 5px 3px 9px;line-height:1.4;letter-spacing:.04em}
+.pr-chip svg.i{width:13px;height:13px;stroke-width:2.6;transition:transform .2s}
+.pr-chip.on svg.i{transform:rotate(90deg)}
+.shop-t{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.shop-c{font-size:10.5px;font-weight:700;color:var(--acc-ink);background:var(--blue-l);border-radius:99px;padding:1px 9px;line-height:1.5}
 .shop-l{font-size:11px;font-weight:700;color:var(--acc-ink)}
 .shop-pr{font-size:9px;color:var(--sub);border:1px solid var(--line);border-radius:5px;padding:0 4px;line-height:1.4}
 .shop-n{font-size:12px;margin-top:3px;line-height:1.4;font-weight:600}
@@ -378,7 +382,7 @@ function gest(s){const r=rawDays(s);if(r==null||r<0||r>300)return null;return{w:
 const gtxt=g=>g?`${g.w}週${g.d}日`:'';
 
 /* ===== ui state ===== */
-const ui={view:'home',open:{},memo:{},ym:null,q:'',draft:null,lb:null};
+const ui={view:'home',open:{},memo:{},shop:{},ym:null,q:'',draft:null,lb:null};
 let tmpPhoto='';
 function go(v){ui.view=v;render();window.scrollTo(0,0)}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
@@ -443,7 +447,7 @@ function hasProducts(){return S.cats.some(c=>c.items.some(i=>prodList(i.t).lengt
 function shopHtml(i){
   return prodList(i.t).map(p=>{
     const r=parseFloat(p.rating),has=r>0,full=has?Math.min(5,Math.round(r)):0;
-    return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(p.label||'ママの人気商品')}</span><span class="shop-pr">PR</span></div>
+    return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(p.label||'ママの人気商品')}</span><span class="shop-pr">PR</span>${p.comment?`<span class="shop-c">${esc(p.comment)}</span>`:''}</div>
     ${p.name?`<div class="shop-n">${esc(p.name)}</div>`:''}
     ${has?`<div class="shop-r"><span class="stars" style="--p:${(r/5*100).toFixed(1)}%" aria-label="評価${r}">★★★★★</span><b>${r.toFixed(2)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}
     <div class="shop-btns">${p.rk?`<a class="shop-b rk" href="${esc(p.rk)}" target="_blank" rel="noopener noreferrer sponsored">楽天で見る</a>`:''}${p.am?`<a class="shop-b am" href="${esc(p.am)}" target="_blank" rel="noopener noreferrer sponsored">Amazonで見る</a>`:''}</div></div>`}).join('');
@@ -471,9 +475,10 @@ function itemRow(c,i,L='cats'){
   return `<div class="it ${i.done?'done':''}"><div class="itm">
    <button class="ck ${i.done?'on':''}" role="checkbox" aria-checked="${i.done}" aria-label="${esc(i.t)}" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('check')}</button>
    <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>${L==='cats'&&i.done?'<span class="bought">購入済み</span>':''}
+   ${L==='cats'&&prodList(i.t).length?`<button class="pr-chip ${ui.shop[i.id]?'on':''}" aria-expanded="${!!ui.shop[i.id]}" aria-label="おすすめ商品（PR）を${ui.shop[i.id]?'閉じる':'見る'}" data-act="toggleShop" data-id="${i.id}">PR${ic('chev')}</button>`:''}
    <button class="ib ${i.memo?'has':''}" aria-label="メモ" data-act="toggleMemo" data-id="${i.id}">${ic('pen')}</button>
    <button class="ib" aria-label="削除" data-act="delItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
-   ${L==='procs'?procExtra(i):''}${L==='cats'?shopHtml(i):''}
+   ${L==='procs'?procExtra(i):''}${L==='cats'&&ui.shop[i.id]?shopHtml(i):''}
    ${i.memo&&!m?`<p class="mp">${esc(i.memo)}</p>`:''}
    ${m?`<textarea class="in memo" rows="2" data-memo="${L}|${c.id}|${i.id}" placeholder="サイズ・色・購入先など">${esc(i.memo)}</textarea>`:''}</div>`;
 }
@@ -672,6 +677,7 @@ const A={
  editDue:()=>sheet(`<h2>出産予定日</h2><form data-form="due"><input class="in" type="date" name="due" value="${S.due||''}" required aria-label="出産予定日"><button class="btn block" style="margin-top:14px">保存</button></form>`),
  toggleCat:d=>{ui.open[d.id]=!ui.open[d.id];render()},
  toggleItem:d=>{const i=S[d.list||'cats'].find(c=>c.id===d.cat)?.items.find(i=>i.id===d.id);if(i){i.done=!i.done;save();render()}},
+ toggleShop:d=>{ui.shop[d.id]=!ui.shop[d.id];render()},
  toggleMemo:d=>{ui.memo[d.id]=!ui.memo[d.id];render()},
  delItem:d=>{const c=S[d.list||'cats'].find(c=>c.id===d.cat);const i=c?.items.find(i=>i.id===d.id);if(!i||!confirm(`「${i.t}」を削除しますか？`))return;c.items=c.items.filter(x=>x.id!==d.id);save();render()},
  newCheckup:()=>checkupSheet(),
