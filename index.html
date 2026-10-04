@@ -43,17 +43,17 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .sec{font-family:var(--serif);font-size:15px;font-weight:600;margin:26px 2px 12px;color:var(--brown-d);letter-spacing:.04em}
 
 /* hero */
-.hero{background:#F6D3DF;color:var(--ink);border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(232,176,196,.38)}
-.hero .hl{font-size:13px;opacity:.85;letter-spacing:.12em}
-.hero .big{font-family:var(--serif);font-size:20px;margin:4px 0 6px;display:flex;align-items:baseline;gap:4px;white-space:nowrap}
-.hero .big b{color:var(--acc-ink);font-size:64px;font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-left:2px}
-.hero .big b + span{margin-right:10px}
-.hero .hs{font-size:15px}
-.hero .hs b{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 2px}
-.hero .pb{background:rgba(255,253,250,.65);margin:18px 0 12px}
+.hero{position:relative;background:#F6D3DF;color:var(--ink);border:0;padding:16px 18px 14px;box-shadow:0 10px 26px rgba(232,176,196,.34)}
+.hero .hl{font-size:12px;opacity:.85;letter-spacing:.12em}
+.hero .big{font-family:var(--serif);font-size:16px;margin:0 0 2px;display:flex;align-items:baseline;gap:3px;white-space:nowrap}
+.hero .big b{color:var(--acc-ink);font-size:44px;font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-left:2px}
+.hero .big b + span{margin-right:8px}
+.hero .hs{font-size:13.5px}
+.hero .hs b{font-family:var(--serif);font-size:18px;font-weight:600;margin:0 2px}
+.hero .pb{height:6px;background:rgba(255,253,250,.65);margin:10px 0 8px}
 .hero .pb i{background:#E39AB5}
-.hero .hm{display:flex;justify-content:space-between;font-size:12.5px;opacity:.9;gap:8px}
-.hero .lnk{margin-top:14px;font-size:12.5px;text-decoration:underline;text-underline-offset:3px;opacity:.9}
+.hero .hm{display:flex;justify-content:space-between;font-size:11.5px;opacity:.9;gap:8px}
+.hero .lnk{position:absolute;top:14px;right:18px;margin:0;font-size:11.5px;text-decoration:underline;text-underline-offset:3px;opacity:.9}
 .hero h2{font-size:19px}
 .hero p{margin:6px 0 16px;font-size:13px;opacity:.9}
 
@@ -108,7 +108,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .hid{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .top-act{display:flex;justify-content:flex-end;margin:-6px 0 16px}
 .empty{text-align:center;color:var(--sub);font-size:13.5px;padding:34px 12px}
-.hero.empty{text-align:left;color:var(--ink);padding:26px 24px}
+.hero.empty{text-align:left;color:var(--ink);padding:20px 18px}
 .hero .in{background:rgba(255,253,250,.96)}
 
 /* checklist */
@@ -163,6 +163,19 @@ textarea.in{resize:vertical;line-height:1.6}
 .stars{font-size:12px;letter-spacing:0;color:transparent;background:linear-gradient(90deg,#E9B44C var(--p),#EADFD6 var(--p));-webkit-background-clip:text;background-clip:text}
 .shop-r b{font-family:var(--serif);font-size:12.5px;margin-left:2px}
 .shop-r small{font-size:10px;color:var(--sub)}
+.shop-p + .shop-p{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.shop-m{display:flex;gap:10px;align-items:center;margin-top:6px}
+.shop-im{flex:none;display:block}
+.shop-im img{width:56px;height:56px;border-radius:10px;object-fit:cover;display:block;border:1px solid var(--line);background:#fff}
+.shop-x{min-width:0}
+.shop-x .shop-n{margin-top:0}
+.shop-x .shop-c{display:inline-block;margin-top:4px}
+.inote{margin:2px 0 0 38px;font-size:12px;color:var(--sub);line-height:1.55}
+.inote b{font-weight:700;color:var(--ink);margin-right:8px}
+.done .inote{opacity:.6}
+.nd{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px;margin-right:7px;background:#F3F0F6;color:#7C6F96;vertical-align:1px}
+.nd.n3{background:#F9E4EC;color:#A9496A}
+.lv{display:inline-block;margin-left:7px;font-size:8px;letter-spacing:1px;color:var(--blue-d);vertical-align:middle;text-decoration:none}
 .shop-btns{display:flex;gap:6px;margin-top:6px}
 .shop-b{flex:1;text-align:center;border-radius:9px;padding:6px 4px;font-size:11.5px;font-weight:700;text-decoration:none;color:#4F2F33;background:var(--blue-d);line-height:1.4}
 .shop-b.rk{background:#F2C2D0}
@@ -322,27 +335,19 @@ const pb=(p,c='')=>`<div class="pb ${c}" role="progressbar" aria-valuenow="${p}"
 const KEY='shussan-note-v1';
 const MOODS=[{v:1,n:'元気',c:'#B7D4E4'},{v:2,n:'軽い',c:'#F0E4AA'},{v:3,n:'普通',c:'#F1C3BB'},{v:4,n:'つらい',c:'#E6A9BF'},{v:5,n:'とてもつらい',c:'#BBAEDA'}];
 function defaults(){
-  const L={
-   '母乳育児':['母乳パッド','さく乳器','授乳クッション','乳首クリーム','母乳フリーザーパック'],
-   'ベビー服・お洗たく':['短肌着（3枚〜）','長肌着（3枚〜5枚）','ベビーウェア（2〜3枚）','おくるみ','ベビー用洗剤'],
-   '哺乳びん・乳首':['哺乳びん（3〜5本）','乳首（1〜2個）','ミルク'],
-   '哺乳びんの洗浄・除菌・保管':['哺乳びん洗剤','哺乳びんブラシ','乳首ブラシ','除菌料または除菌グッズ','消毒ケースまたは乾燥器'],
-   'おむつ':['紙おむつ','おしりふき','おむつ用ごみ箱','おむつ替えシート'],
-   'おへや':['ベビー布団＆カバー','ベビーベッド','防水シーツ','温湿度計','タオルケット','バウンサー'],
-   'おふろ':['ベビーバス','ベビーソープ','沐浴布'],
-   'お出かけ':['チャイルドシート','抱っこひも','ベビーカー'],
-   'スキンケア':['ベビーローション','ベビークリーム'],
-   'おしゃぶり・おもちゃ':['おしゃぶり','ベッドメリー'],
-   'お手入れ':['電動爪やすり','爪切り','ベビー綿棒','ガーゼ','ベビーオイル'],
-   '健康管理':['ベビー体温計','鼻吸い器'],
-   '入院準備・産後インナー':['母子手帳','診察券','骨盤ベルト','授乳ブラ','産褥ショーツ','着圧ソックス','リフォームインナー','授乳口つきパジャマ','退院着（ママ用）'],
-   'あると便利':['ベビーセンサー','電気ケトル','ウォーターサーバー','おしりふきウォーマー（冬生まれ）']
-  };
-  const mk=x=>({id:uid(),t:x,done:false,memo:''});
-  return{v:1,listVer:2,due:'',birth:'',procs:procDefaults(),
-   cats:Object.keys(L).map(n=>({id:uid(),name:n,items:L[n].map(mk)})),
+  return{v:1,listVer:3,due:'',birth:'',procs:procDefaults(),
+   cats:prepDefaults(),
    checkups:[],echoes:[],moods:{},diary:{},
-   wishes:['マタニティフォト','ジェンダーリビール','ベビー服購入','名前決め','夫婦デート'].map(t=>({id:uid(),t,done:false}))};
+   wishes:wishDefaults(),wishVer:2};
+}
+const PH=[['e','初期','〜15週ごろ'],['m','中期','16〜27週ごろ'],['l','後期','28週〜出産']];
+function wishDefaults(){
+  const L={
+   e:['お腹が出る前の写真を撮っておく','出産・育児の制度を調べておく'],
+   m:['夫婦デート・家族旅行','マタニティフォトを撮る','マタニティヨガを始める','美容院に行く','歯科検診を受ける','赤ちゃん用品のお買い物','ジェンダーリビール'],
+   l:['スマホの容量整理','緊急連絡先一覧を作成','お部屋に赤ちゃんスペースを作る','夫婦でゆっくり外食','ひたすら寝る','バースプラン作成']
+  };
+  return Object.keys(L).flatMap(ph=>L[ph].map(t=>({id:uid(),t,done:false,ph})));
 }
 function procDefaults(){
   const G=[
@@ -382,14 +387,31 @@ function normalize(o){
   ['moods','diary'].forEach(k=>{if(!r[k]||typeof r[k]!=='object'||Array.isArray(r[k]))r[k]={}});
   if(typeof r.due!=='string')r.due='';
   if(typeof r.birth!=='string')r.birth='';
-  if(oldVer<2){
+  if(oldVer<3){
     const done=new Set(),memo={};
     (Array.isArray(o.cats)?o.cats:[]).forEach(c=>(c.items||[]).forEach(i=>{if(i.done)done.add(i.t);if(i.memo)memo[i.t]=i.memo}));
     const nd=defaults();nd.cats.forEach(c=>c.items.forEach(i=>{if(done.has(i.t))i.done=true;if(memo[i.t])i.memo=memo[i.t]}));
     r.cats=nd.cats;
   }
-  r.listVer=2;
+  r.listVer=3;
+  if((o.wishVer||1)<2){
+    const map={'マタニティフォト':'マタニティフォトを撮る','夫婦デート':'夫婦デート・家族旅行','ベビー服購入':'赤ちゃん用品のお買い物'};
+    const nw=wishDefaults();
+    (Array.isArray(o.wishes)?o.wishes:[]).forEach(w=>{if(!w||!w.t)return;const t=map[w.t]||w.t;const x=nw.find(y=>y.t===t);if(x)x.done=!!w.done;else nw.push({id:uid(),t:w.t,done:!!w.done,ph:'m'})});
+    r.wishes=nw;
+  }
+  r.wishVer=2;
   return r;
+}
+const PREP=[["入院準備リスト","陣痛バッグ","母子健康手帳",3,"","入院時の本人確認・妊娠出産の記録"],["入院準備リスト","陣痛バッグ","印鑑",3,"","入院・各種手続きに使用"],["入院準備リスト","陣痛バッグ","健康保険証",3,"","医療費・入院手続きに使用"],["入院準備リスト","陣痛バッグ","お金",3,"","入院中に必要な支払いなどに使用"],["入院準備リスト","陣痛バッグ","産院の診察券",3,"","産院での受診・本人確認に使用"],["入院準備リスト","陣痛バッグ","携帯電話",3,"","連絡・情報確認・充電に使用"],["入院準備リスト","陣痛バッグ","産褥ショーツ",3,"2～3枚","股の部分が開く産後用ショーツ"],["入院準備リスト","陣痛バッグ","産褥パッド",3,"1パック","産後の悪露を吸収。破水したときにも使える"],["入院準備リスト","陣痛バッグ","ストロー付きキャップ",2,"1～2個","横になったまま水分補給できる"],["入院準備リスト","陣痛バッグ","フェイスタオル",3,"2～3枚","汗や手などを拭く"],["入院準備リスト","陣痛バッグ","リップクリーム",2,"1本","口呼吸などによる唇の乾燥対策"],["入院準備リスト","陣痛バッグ","ヘアゴム",2,"1個","髪をまとめる"],["入院準備リスト","陣痛バッグ","陣痛逃しグッズ",2,"適宜","いきみ逃しなどに使用。テニスボールが定番"],["入院準備リスト","陣痛バッグ","カメラ・ビデオカメラ",2,"1台","写真・動画を残す場合に使用"],["入院準備リスト","入院バッグ","必要書類（出生届など）",3,"","入院・出産に必要な書類"],["入院準備リスト","入院バッグ","ベビー肌着",3,"1～2枚","新生児向け。50cmサイズが目安"],["入院準備リスト","入院バッグ","ベビー服",3,"1～2枚","新生児向け。50cmサイズが目安"],["入院準備リスト","入院バッグ","おくるみ",2,"1枚","赤ちゃんをくるんだり掛けたりする"],["入院準備リスト","入院バッグ","マタニティパジャマ",3,"2～3枚","前開きタイプは授乳しやすい"],["入院準備リスト","入院バッグ","スリッパ",3,"1足","産院内の移動用"],["入院準備リスト","入院バッグ","靴下",2,"2～3足","冷え対策"],["入院準備リスト","入院バッグ","授乳用ブラ",3,"3枚","授乳頻度が多いため専用のものが便利"],["入院準備リスト","入院バッグ","母乳パッド",2,"1パック","母乳が衣類にしみるのを防ぐ"],["入院準備リスト","入院バッグ","バスタオル",3,"2枚","入浴時などに使用"],["入院準備リスト","入院バッグ","洗面グッズ",3,"1セット","歯ブラシ・歯みがき粉・洗顔フォームなど"],["入院準備リスト","入院バッグ","乳頭ケアクリーム",3,"1本","授乳による乳頭の傷・乾燥などをケア"],["入院準備リスト","入院バッグ","骨盤ベルト",3,"1枚","産後の骨盤をサポート"],["入院準備リスト","入院バッグ","入浴グッズ",3,"1セット","ボディソープ・シャンプーなど"],["入院準備リスト","入院バッグ","院内用バッグ",2,"1個","院内で貴重品などを持ち運ぶ"],["入院準備リスト","入院バッグ","筆記用具",3,"1セット","書類の記入や記録に使用"],["入院準備リスト","入院バッグ","はおりもの",2,"1枚","カーディガンなど。体温調節用"],["入院準備リスト","入院バッグ","化粧品",2,"1セット","退院時などの身支度に使用"],["入院準備リスト","入院バッグ","食器",2,"1セット","箸・コップ・お皿など"],["入院準備リスト","入院バッグ","ティッシュ",2,"1箱","病室で使用"],["入院準備リスト","入院バッグ","ママの退院服",3,"1着","締めつけのない服"],["入院準備リスト","入院バッグ","円座・授乳クッション",2,"1個","会陰切開時の座位や授乳に使用"],["入院準備リスト","入院バッグ","ビニール袋",2,"2～3枚","ごみ入れ・洗濯物入れなど"],["入院準備リスト","入院バッグ","母乳ケアハーブティー",2,"1個","母乳育児をサポートするハーブティー"],["育児グッズリスト","おむつグッズ","おむつ",3,"1パック","布おむつと紙おむつがある"],["育児グッズリスト","おむつグッズ","おしりふき",3,"1パック","おしっこ・うんちの拭き取り"],["育児グッズリスト","おむつグッズ","紙おむつ処理器",2,"1個","使用済みおむつのにおいを抑えて捨てられるごみ箱"],["育児グッズリスト","おむつグッズ","おしりふきのふた",2,"1枚","おしりふきの乾燥を防ぐ"],["育児グッズリスト","おむつグッズ","おむつ替えシート",2,"1枚","おむつ替え時の汚れ対策"],["育児グッズリスト","おむつグッズ","消臭袋or 消臭ポーチ",2,"1パック","使用済みおむつを入れる"],["育児グッズリスト","授乳グッズ","哺乳ビン",2,"1本〜","ミルクを飲ませるボトル"],["育児グッズリスト","授乳グッズ","哺乳ビン洗浄＆除菌グッズ",3,"1セット","哺乳ビンの洗浄・消毒"],["育児グッズリスト","授乳グッズ","授乳クッション",3,"1個","授乳時にひざの上に置いて使用"],["育児グッズリスト","授乳グッズ","粉ミルク",3,"1箱","お湯で溶かして与える"],["育児グッズリスト","授乳グッズ","母乳パッド",3,"1パック","母乳で下着や衣類が汚れるのを防ぐ"],["育児グッズリスト","授乳グッズ","搾乳器",2,"1個","母乳を搾る"],["育児グッズリスト","授乳グッズ","授乳ケープ",2,"1枚","外出先などで授乳する際の目隠し"],["育児グッズリスト","ねんねグッズ","ベビー布団",3,"1組","ベビー専用の布団。敷き布団は硬めのものを選ぶ"],["育児グッズリスト","ねんねグッズ","ベビーベッドまたはベッドインベッド",3,"1台","赤ちゃん専用のベッド"],["育児グッズリスト","ねんねグッズ","ベビー用クッション",2,"1個","寝かせるときの姿勢サポートや、吐き戻し対策に使用"],["育児グッズリスト","ねんねグッズ","ベビーラック＆チェア",2,"1台","寝かせたり座らせたりできる。昼間の過ごし場所に"],["育児グッズリスト","ねんねグッズ","バウンサー",2,"1台","赤ちゃんの動きに合わせて揺れるチェア"],["育児グッズリスト","ねんねグッズ","ベビージム",2,"1台","おもちゃが付いたマットなど"],["育児グッズリスト","ねんねグッズ","メリー",2,"1台","おもちゃや音機能のある遊具"],["育児グッズリスト","ねんねグッズ","加湿器",2,"1台","室内の湿度を保つ"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビーバス",3,"1個","新生児期の沐浴に使用"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビーソープ",3,"1個","赤ちゃんのデリケートな肌を洗う"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用スキンケア",3,"1個","ローションやクリームなどで保湿"],["育児グッズリスト","沐浴・ベビーケアグッズ","ガーゼ",3,"10枚","口を拭いたり入浴に使用"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用綿棒",3,"1個","耳・鼻・おへそのケア"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用つめ切り",3,"1セット","赤ちゃんの小さな爪を切る"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用 爪やすり",3,"1セット","赤ちゃんの小さな爪を整える"],["育児グッズリスト","沐浴・ベビーケアグッズ","湯温計",2,"1個","沐浴時のお湯の温度確認"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用衣類洗剤",3,"1個","赤ちゃんの衣類を洗う"],["育児グッズリスト","沐浴・ベビーケアグッズ","ベビー用体温計",3,"1個","毎日の体調管理"],["育児グッズリスト","沐浴・ベビーケアグッズ","鼻水吸い器",2,"1個","赤ちゃんの鼻水を吸い取る"],["育児グッズリスト","肌着・お洋服","短肌着",2,"4～5枚","腰までの短めの肌着。重ね着に便利"],["育児グッズリスト","肌着・お洋服","長肌着",2,"4～5枚","足先までの長めの肌着。重ね着に便利"],["育児グッズリスト","肌着・お洋服","コンビ肌着",3,"4～5枚","膝までの肌着。股ボタンでズボン型にできる"],["育児グッズリスト","肌着・お洋服","ツーウェイオール",3,"3～6枚","ワンピース型・ズボン型の2通りで着られる"],["育児グッズリスト","肌着・お洋服","おくるみ",2,"1枚〜","肌寒いときや抱っこ時などに使用"],["育児グッズリスト","肌着・お洋服","カバーオール",3,"1枚","股下がズボン型のつなぎ"],["育児グッズリスト","肌着・お洋服","ベストor カーディガン",2,"1枚","体温調節に使用"],["育児グッズリスト","肌着・お洋服","スタイ（よだれかけ）",2,"1枚","よだれや吐き戻しから服を守る"],["育児グッズリスト","おでかけグッズ","帽子",2,"1個","日差しや冷気から頭を守る"],["育児グッズリスト","おでかけグッズ","靴下",2,"1足","外出時の足の冷え対策"],["育児グッズリスト","おでかけグッズ","抱っこひも",2,"1個","赤ちゃんを抱っこして移動"],["育児グッズリスト","おでかけグッズ","ベビーカー",2,"1台","新生児期は使う機会が少ないため、退院後に用意してもOK"],["育児グッズリスト","おでかけグッズ","チャイルドシート",3,"1台","退院時、車で帰宅する場合は必ず必要"],["育児グッズリスト","おでかけグッズ","ベビー用日焼け止め",2,"1本","赤ちゃんの紫外線対策"],["育児グッズリスト","おでかけグッズ","マザーズバッグ",2,"1個","赤ちゃんとの外出に必要な荷物を入れる"],["育児グッズリスト","おでかけグッズ","おでかけ用ケープ",2,"1枚","UV・寒さ対策などに使用"],["育児グッズリスト","お部屋","プレイマット",2,"1枚","リビングで赤ちゃんを遊ばせたり、落下などの衝撃防止用などに"],["育児グッズリスト","お部屋","ベビー収納グッズ",2,"1～2個","お世話グッズをしまう収納ボックス。一カ所にまとめると便利"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","葉酸",3,"必要な量だけ","おなかの赤ちゃんの発育に欠かせない栄養素。食事やサプリメントで摂取。"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","母子手帳ケース",2,"1個","母子手帳や診察カード類、妊婦健診補助券をまとめて管理。"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","マタニティクリーム・オイル",3,"1～2個","妊娠中の敏感・乾燥しやすい肌にうるおいを与え、早めのケアに。"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","マタニティショーツ",3,"3～5枚","おへその上まですっぽり包み込める妊娠中向けショーツ。"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","ハーフトップ（ワイヤーなし）",2,"2～3枚","バスト全体をゆったり支え、産後の授乳のしやすさも考えた下着。"],["妊娠中のママグッズリスト","妊娠初期（～4カ月）","抱き枕",2,"1個","妊娠中のつわりや寝苦しい体勢をサポート。授乳クッションとして使えるタイプも。"],["妊娠中のママグッズリスト","妊娠中期（5～7カ月）","妊婦帯・腹帯",3,"1～2個","大きくなったおなかを支え、腰を安定させる。"],["妊娠中のママグッズリスト","妊娠中期（5～7カ月）","マタニティウエア",3,"2～3枚","おなかまわりを締めつけず、動きやすいウェア。産後の授乳も見据えて選ぶ。"],["妊娠中のママグッズリスト","妊娠中期（5～7カ月）","マタニティパンツ",3,"2～3本","おなかのふくらみに合わせて調節できるアジャスター付きパンツ。"],["妊娠中のママグッズリスト","妊娠中期（5～7カ月）","マタニティ用レギンス・タイツ・パンスト",3,"2～3枚","おなか部分に専用のマチがあり、大きなおなかを包む。"],["妊娠中のママグッズリスト","妊娠後期（8～10カ月）","会陰ケアオイル",2,"1個","出産に備えて会陰をマッサージするオイル"],["妊娠中のママグッズリスト","妊娠後期（8～10カ月）","ラズベリーリーフティー",2,"1個","妊娠後期から飲まれることの多いハーブティー"],["妊娠中のママグッズリスト","妊娠後期（8～10カ月）","吸水ケアシート",2,"1パック","尿もれ対策に使う専用シート。消臭効果のあるものがおすすめ。"],["あってよかったもの","入院バッグ","モバイル充電器",1,"","入院中のスマホの充電切れ対策に"],["あってよかったもの","入院バッグ","延長コード",1,"","ベッドから遠いコンセントでも充電できる"],["あってよかったもの","入院バッグ","フェイスパック",2,"","病室は乾燥しがち。産後は肌が荒れやすいのであると◎"],["あってよかったもの","入院バッグ","メモリアルグッズ",2,"1～2個","手形・足形など、赤ちゃんの誕生や成長を記念に残すためのグッズ"],["あってよかったもの","お部屋","ベビーグッズ収納家具",2,"1～2個","洋服や肌着などの収納に便利。段ボール製など手軽なものも"]];
+function prepDefaults(){
+  const out=[],idx={};
+  PREP.forEach(([sec,cat,t,lv,qty,note])=>{
+    const k=sec+'|'+cat;
+    if(!idx[k]){idx[k]={id:uid(),sec,name:cat,items:[]};out.push(idx[k])}
+    idx[k].items.push({id:uid(),t,done:false,memo:'',lv,qty,note});
+  });
+  return out;
 }
 function newRoot(){const id=uid();return{v:2,cur:id,weekStart:0,list:[{id,name:'1人目',data:defaults()}]}}
 function normRoot(o){
@@ -467,21 +489,23 @@ function vHome(){
 let PRODUCTS={updated:'',items:{}};
 try{const c=localStorage.getItem('mama-products');if(c)PRODUCTS=JSON.parse(c)}catch(e){}
 const RK_RE=/^https:\/\/([a-z0-9-]+\.)*(rakuten\.co\.jp|r10\.to)\//i;
+const IM_RE=/^https:\/\/(hbb\.afl\.rakuten\.co\.jp|thumbnail\.image\.rakuten\.co\.jp)\//i;
 const AM_RE=/^https:\/\/([a-z0-9-]+\.)*(amazon\.co\.jp|amzn\.to|amzn\.asia|a\.co|link\.amazon)\//i;
 function prodList(name){
   let v=PRODUCTS&&PRODUCTS.items&&PRODUCTS.items[name];
   if(location.hash==='#demo'&&name==='チャイルドシート')v=[{name:'サンプル商品A（表示確認用）',rating:4.7,count:1234,ratingFrom:'楽天',rakuten:'https://www.rakuten.co.jp/',amazon:'https://www.amazon.co.jp/'},{name:'サンプル商品B（表示確認用）',rating:4.5,rakuten:'https://www.rakuten.co.jp/'}];
   if(!v)return[];
-  return(Array.isArray(v)?v:[v]).map(p=>p&&Object.assign({},p,{rk:RK_RE.test(p.rakuten||p.url||'')?(p.rakuten||p.url):'',am:AM_RE.test(p.amazon||'')?p.amazon:''})).filter(p=>p&&(p.rk||p.am)).slice(0,3);
+  return(Array.isArray(v)?v:[v]).map(p=>p&&Object.assign({},p,{rk:RK_RE.test(p.rakuten||p.url||'')?(p.rakuten||p.url):'',am:AM_RE.test(p.amazon||'')?p.amazon:'',im:IM_RE.test(p.img||'')?p.img:''})).filter(p=>p&&(p.rk||p.am)).slice(0,3);
 }
 function hasProducts(){return S.cats.some(c=>c.items.some(i=>prodList(i.t).length))}
 function shopHtml(i){
-  return prodList(i.t).map(p=>{
-    const r=parseFloat(p.rating),has=r>0,full=has?Math.min(5,Math.round(r)):0;
-    return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(p.label||'ママの人気商品')}</span><span class="shop-pr">PR</span>${p.comment?`<span class="shop-c">${esc(p.comment)}</span>`:''}</div>
-    ${p.name?`<div class="shop-n">${esc(p.name)}</div>`:''}
-    ${has?`<div class="shop-r"><span class="stars" style="--p:${(r/5*100).toFixed(1)}%" aria-label="評価${r}">★★★★★</span><b>${r.toFixed(2)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}
-    <div class="shop-btns">${p.rk?`<a class="shop-b rk" href="${esc(p.rk)}" target="_blank" rel="noopener noreferrer sponsored">楽天で見る</a>`:''}${p.am?`<a class="shop-b am" href="${esc(p.am)}" target="_blank" rel="noopener noreferrer sponsored">Amazonで見る</a>`:''}</div></div>`}).join('');
+  const P=prodList(i.t);if(!P.length)return '';
+  const solo=P.length===1&&P[0].comment,either=P.length>1&&P.some(p=>p.either);
+  return `<div class="shop"><div class="shop-t"><span class="shop-l">${esc(P[0].label||'ママの人気商品')}</span><span class="shop-pr">PR</span>${solo?`<span class="shop-c">${esc(P[0].comment)}</span>`:''}${either?'<span class="shop-c">どちらか1つでOK</span>':''}</div>${P.map(p=>{
+    const r=parseFloat(p.rating),has=r>0,href=p.rk||p.am;
+    const img=p.im?`<a class="shop-im" href="${esc(href)}" target="_blank" rel="noopener noreferrer sponsored" aria-label="${esc(p.name||'商品')}を見る"><img src="${esc(p.im)}" alt="" width="56" height="56" loading="lazy" onerror="this.parentNode.remove()"></a>`:'';
+    return `<div class="shop-p"><div class="shop-m">${img}<div class="shop-x">${p.name?`<div class="shop-n">${esc(p.name)}</div>`:''}${has?`<div class="shop-r"><span class="stars" style="--p:${(r/5*100).toFixed(1)}%" aria-label="評価${r}">★★★★★</span><b>${r.toFixed(2)}</b>${p.count?`<small>（${Number(p.count).toLocaleString()}件）</small>`:''}${p.ratingFrom?`<small>${esc(p.ratingFrom)}</small>`:''}</div>`:''}${(!solo&&P.length>1&&p.comment)?`<span class="shop-c">${esc(p.comment)}</span>`:''}</div></div>
+    <div class="shop-btns">${p.rk?`<a class="shop-b rk" href="${esc(p.rk)}" target="_blank" rel="noopener noreferrer sponsored">楽天で見る</a>`:''}${p.am?`<a class="shop-b am" href="${esc(p.am)}" target="_blank" rel="noopener noreferrer sponsored">Amazonで見る</a>`:''}</div></div>`}).join('')}</div>`;
 }
 function shopNote(){
   if(!hasProducts())return '';
@@ -501,6 +525,7 @@ function loadProducts(){
   }catch(e){}
 }
 
+const NEED={3:'必須',2:'あると安心',1:'余裕があれば'};
 function itemRow(c,i,L='cats'){
   const m=ui.memo[i.id];
   return `<div class="it ${i.done?'done':''}"><div class="itm">
@@ -508,6 +533,7 @@ function itemRow(c,i,L='cats'){
    <span class="tx" data-act="toggleItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${esc(i.t)}</span>${L==='cats'&&(i.done||prodList(i.t).length)?`<span class="rcol">${L==='cats'&&i.done?'<span class="bought">購入済み</span>':''}${L==='cats'&&prodList(i.t).length?`<button class="pr-chip ${ui.shop[i.id]?'on':''}" aria-expanded="${!!ui.shop[i.id]}" aria-label="おすすめ商品（PR）を${ui.shop[i.id]?'閉じる':'見る'}" data-act="toggleShop" data-id="${i.id}">人気商品${ic('chev')}</button>`:''}</span>`:''}
    <button class="ib ${i.memo?'has':''}" aria-label="メモ" data-act="toggleMemo" data-id="${i.id}">${ic('pen')}</button>
    <button class="ib" aria-label="削除" data-act="delItem" data-list="${L}" data-cat="${c.id}" data-id="${i.id}">${ic('trash')}</button></div>
+   ${L==='cats'&&(i.lv||i.qty||i.note)?`<p class="inote">${i.lv?`<span class="nd n${i.lv}">${NEED[i.lv]||''}</span>`:''}${i.qty?`<b>目安 ${esc(i.qty)}</b>`:''}${esc(i.note||'')}</p>`:''}
    ${L==='procs'?procExtra(i):''}${L==='cats'&&ui.shop[i.id]?shopHtml(i):''}
    ${i.memo&&!m?`<p class="mp">${esc(i.memo)}</p>`:''}
    ${m?`<textarea class="in memo" rows="2" data-memo="${L}|${c.id}|${i.id}" placeholder="サイズ・色・購入先など">${esc(i.memo)}</textarea>`:''}</div>`;
@@ -519,12 +545,14 @@ function catCard(c,L='cats'){
    ${open?`<div class="items">${c.items.map(i=>itemRow(c,i,L)).join('')}
    <form class="add" data-form="addItem" data-list="${L}" data-cat="${c.id}"><input class="in" name="t" maxlength="40" placeholder="項目を追加" autocomplete="off" required><button class="btn sm">追加</button></form></div>`:''}</section>`;
 }
+function legendNote(){return `<p class="note" style="margin:0 4px 14px">各項目の下に「必須」「あると安心」「余裕があれば」の目安と、用意する数を表示しています。</p>`}
+function prepCats(){let last=null;return S.cats.map(c=>{let h='';if(c.sec&&c.sec!==last){h=`<div class="sec">${esc(c.sec)}</div>`;last=c.sec}return h+catCard(c,'cats')}).join('')}
 function vPrep(){
   const s=prepStat();
   if(!ui.init){ui.init=1;if(S.cats[0])ui.open[S.cats[0].id]=1}
   return head('出産準備リスト','赤ちゃんを迎える準備をひとつずつ')+
   `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>全体の達成率</h3><span class="pc" style="font-size:28px">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p)}</div><span class="sub">${s.d} / ${s.t} 項目が完了</span></div>`+
-  shopNote()+S.cats.map(c=>catCard(c,'cats')).join('');
+  legendNote()+shopNote()+prepCats();
 }
 
 /* --- checkup --- */
@@ -664,12 +692,19 @@ function vProc(){
 }
 
 /* --- wish --- */
+function curPh(){const g=gest(todayS());return g?(g.w<16?'e':g.w<28?'m':'l'):''}
+function wishRow(w){
+  return `<div class="it ${w.done?'done':''}"><div class="itm"><button class="ck ${w.done?'on':''}" role="checkbox" aria-checked="${w.done}" aria-label="${esc(w.t)}" data-act="toggleWish" data-id="${w.id}" style="border-color:var(--brown)${w.done?';background:var(--brown);':''}">${ic('check')}</button><span class="tx" data-act="toggleWish" data-id="${w.id}">${esc(w.t)}</span><button class="ib" aria-label="削除" data-act="delWish" data-id="${w.id}">${ic('trash')}</button></div></div>`;
+}
 function vWish(){
-  const s=wishStat();
+  const s=wishStat(),cp=curPh();
   return subHead('やりたいことリスト','妊娠中にしておきたいこと')+
-  `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>達成率</h3><span class="pc" style="font-size:28px;color:var(--brown-d)">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p,'br')}</div><span class="sub">${s.d} / ${s.t} 達成</span></div>
-  <div class="card" style="padding:6px 20px 20px">${S.wishes.length?S.wishes.map(w=>`<div class="it ${w.done?'done':''}"><div class="itm"><button class="ck ${w.done?'on':''}" role="checkbox" aria-checked="${w.done}" aria-label="${esc(w.t)}" data-act="toggleWish" data-id="${w.id}" style="border-color:var(--brown)${w.done?';background:var(--brown);':''}">${ic('check')}</button><span class="tx" data-act="toggleWish" data-id="${w.id}">${esc(w.t)}</span><button class="ib" aria-label="削除" data-act="delWish" data-id="${w.id}">${ic('trash')}</button></div></div>`).join(''):'<div class="empty">やりたいことを追加しましょう。</div>'}
-  <form class="add" data-form="wish"><input class="in" name="t" maxlength="40" placeholder="やりたいことを追加" autocomplete="off" required><button class="btn sm ghost">追加</button></form></div>`;
+  `<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><h3>達成率</h3><span class="pc" style="font-size:28px;color:var(--brown-d)">${s.p}%</span></div><div style="margin:14px 0 8px">${pb(s.p,'br')}</div><span class="sub">${s.d} / ${s.t} 達成</span></div>`+
+  PH.map(([k,n,r])=>{
+    const L=S.wishes.filter(w=>(w.ph||'m')===k),d=L.filter(w=>w.done).length,p=L.length?Math.round(d/L.length*100):0;
+    return `<section class="card" style="padding:16px 20px 20px"><div class="row" style="justify-content:space-between;align-items:baseline;gap:8px"><h3 style="display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px">${n}<span class="sub" style="font-weight:400">${r}</span>${cp===k?'<span class="badge">いまここ</span>':''}</h3><span class="pc" style="font-size:16px;color:var(--brown-d);white-space:nowrap">${d} / ${L.length}</span></div><div style="margin:10px 0 2px">${pb(p,'br')}</div>
+    ${L.length?L.map(wishRow).join(''):'<div class="empty" style="padding:18px 0 4px">まだありません</div>'}
+    <form class="add" data-form="wish" data-ph="${k}"><input class="in" name="t" maxlength="40" placeholder="${n}にやりたいことを追加" autocomplete="off" required><button class="btn sm ghost">追加</button></form></section>`}).join('');
 }
 
 /* --- more / data --- */
@@ -753,7 +788,7 @@ const F={
  renamePreg:(f,fd)=>{const n=(fd.get('name')||'').trim().slice(0,20);if(!n)return;curP().name=n;save();closeSheet();render();toast('名前を変更しました')},
  due:(f,fd)=>{S.due=fd.get('due');save();closeSheet();render();toast('予定日を保存しました')},
  addItem:(f,fd)=>{const t=(fd.get('t')||'').trim();const c=S[f.dataset.list||'cats'].find(c=>c.id===f.dataset.cat);if(!t||!c)return;c.items.push({id:uid(),t,limit:'',calc:'',note:'',done:false,memo:''});save();render()},
- wish:(f,fd)=>{const t=(fd.get('t')||'').trim();if(!t)return;S.wishes.push({id:uid(),t,done:false});save();render()},
+ wish:(f,fd)=>{const t=(fd.get('t')||'').trim();if(!t)return;S.wishes.push({id:uid(),t,done:false,ph:f.dataset.ph||'m'});save();render()},
  checkup:(f,fd)=>{
   const o={id:fd.get('id')||uid(),date:fd.get('date')};['w','d','efw','bpd','fl','ac'].forEach(k=>o[k]=(fd.get(k)||'').trim());o.comment=(fd.get('comment')||'').trim();
   const i=S.checkups.findIndex(c=>c.id===o.id);if(i>=0)S.checkups[i]=o;else S.checkups.push(o);
