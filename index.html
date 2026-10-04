@@ -14,9 +14,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <style>
 :root{
-  --bg:#FFFFFF; --bg2:#FAF5E9; --card:#FFFFFF; --ink:#4F3F42; --sub:#85707A; --faint:#C9BDC0;
-  --line:#EFE2E1; --blue:#EDBFBF; --blue-d:#DFA4B4; --blue-l:#FAE6EA; --acc-ink:#B24C6A;
-  --brown:#B4D9E2; --brown-d:#3F7F93; --brown-l:#E6F3F6;
+  --bg:#FFFFFF; --bg2:#FAF6F4; --card:#FFFFFF; --ink:#4F3F42; --sub:#85707A; --faint:#C9BDC0;
+  --line:#F0E4E6; --blue:#F2CAD7; --blue-d:#E8B0C4; --blue-l:#FCEBF1; --acc-ink:#A9496A;
+  --brown:#B7D4E4; --brown-d:#3F7893; --brown-l:#E7F1F7;
   --serif:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Yu Gothic","Noto Sans JP",sans-serif;
   --sans:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
 }
@@ -43,7 +43,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .sec{font-family:var(--serif);font-size:15px;font-weight:600;margin:26px 2px 12px;color:var(--brown-d);letter-spacing:.04em}
 
 /* hero */
-.hero{background:#F3CDD2;color:var(--ink);border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(223,164,180,.38)}
+.hero{background:#F6D3DF;color:var(--ink);border:0;padding:26px 24px 22px;box-shadow:0 14px 34px rgba(232,176,196,.38)}
 .hero .hl{font-size:13px;opacity:.85;letter-spacing:.12em}
 .hero .big{font-family:var(--serif);font-size:20px;margin:4px 0 6px;display:flex;align-items:baseline;gap:4px;white-space:nowrap}
 .hero .big b{color:var(--acc-ink);font-size:64px;font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-left:2px}
@@ -51,7 +51,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .hero .hs{font-size:15px}
 .hero .hs b{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 2px}
 .hero .pb{background:rgba(255,253,250,.65);margin:18px 0 12px}
-.hero .pb i{background:#D88CA3}
+.hero .pb i{background:#E39AB5}
 .hero .hm{display:flex;justify-content:space-between;font-size:12.5px;opacity:.9;gap:8px}
 .hero .lnk{margin-top:14px;font-size:12.5px;text-decoration:underline;text-underline-offset:3px;opacity:.9}
 .hero h2{font-size:19px}
@@ -61,10 +61,15 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .pb{height:8px;background:var(--bg2);border-radius:99px;overflow:hidden}
 .pb i{display:block;height:100%;background:var(--blue-d);border-radius:99px;min-width:0}
 .pb.br i{background:var(--brown)}
+.pb.k0 i{background:#EBB4C6}
+.pb.k1 i{background:#B7D4E4}
+.pb.k2 i{background:#C4B7DD}
+.pb.k3 i{background:#EBDD9C}
+.pb.k4 i{background:#EDB9B2}
 
 /* tiles */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.18);display:flex;flex-direction:column;gap:8px;min-height:128px}
+.tile-s{background:var(--card);border-radius:20px;padding:16px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(232,176,196,.18);display:flex;flex-direction:column;gap:8px;min-height:128px}
 .tile-s .t{font-size:12.5px;color:var(--sub)}
 .tile-s .v{font-family:var(--serif);font-size:30px;line-height:1.15;font-weight:500}
 .tile-s .v small{font-size:13px;margin-left:2px}
@@ -72,10 +77,10 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .tile-s .n{font-size:12px;color:var(--sub)}
 
 /* link rows */
-.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.15)}
+.lrow{display:flex;align-items:center;gap:14px;width:100%;padding:17px 20px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(232,176,196,.15)}
 .lrow .ic{width:42px;height:42px;border-radius:14px;background:var(--blue-l);color:var(--acc-ink);display:grid;place-items:center;flex:none}
-.lrow .ic.c{background:#F1E9F5;color:#7E5D8C}
-.lrow .ic.d{background:#F9EDE5;color:#9A6A50}
+.lrow .ic.c{background:#EEE9F8;color:#6F5BA3}
+.lrow .ic.d{background:#FAF3D3;color:#85711F}
 .lrow .ic.b{background:var(--brown-l);color:var(--brown-d)}
 .lrow .tt{flex:1;min-width:0}
 .lrow .tt b{display:block;font-family:var(--serif);font-size:16px;font-weight:600}
@@ -145,7 +150,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .rcol{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
 .rcol .bought{font-size:10px;padding:0 9px;line-height:1.5}
 .rcol .pr-chip{font-size:10px;padding:0 4px 0 9px;line-height:1.5;min-height:0}
-.shop{margin:8px 0 0 38px;background:#FFF8F6;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.shop{margin:8px 0 0 38px;background:#FFF8FA;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .pr-chip{display:inline-flex;align-items:center;gap:0;flex:none;font-size:10.5px;font-weight:700;color:var(--acc-ink);background:var(--blue-l);border-radius:99px;padding:3px 5px 3px 9px;line-height:1.4;letter-spacing:.02em}
 .pr-chip svg.i{width:13px;height:13px;stroke-width:2.6;transition:transform .2s}
 .pr-chip.on svg.i{transform:rotate(90deg)}
@@ -160,8 +165,8 @@ textarea.in{resize:vertical;line-height:1.6}
 .shop-r small{font-size:10px;color:var(--sub)}
 .shop-btns{display:flex;gap:6px;margin-top:6px}
 .shop-b{flex:1;text-align:center;border-radius:9px;padding:6px 4px;font-size:11.5px;font-weight:700;text-decoration:none;color:#4F2F33;background:var(--blue-d);line-height:1.4}
-.shop-b.rk{background:#EDBFBF}
-.shop-b.am{background:#B4D9E2}
+.shop-b.rk{background:#F2C2D0}
+.shop-b.am{background:#B7D4E4}
 .pinfo{margin:8px 0 0 38px}
 .pinfo .lims{display:flex;flex-wrap:wrap;gap:6px}
 .lim{font-size:11.5px;background:var(--bg2);color:var(--sub);padding:3px 10px;border-radius:99px;line-height:1.5}
@@ -173,7 +178,7 @@ textarea.in{resize:vertical;line-height:1.6}
 /* timeline */
 .tl{position:relative;padding-left:24px;margin-top:6px}
 .tl:before{content:"";position:absolute;left:6px;top:10px;bottom:10px;width:2px;background:var(--line)}
-.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.18)}
+.tli{position:relative;width:100%;display:block;background:var(--card);border-radius:20px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(232,176,196,.18)}
 .tli:before{content:"";position:absolute;left:-23px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
 .tli .d{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .tli .d b{font-family:var(--serif);font-size:16px;font-weight:600}
@@ -243,7 +248,7 @@ textarea.in{resize:vertical;line-height:1.6}
 .mood-b.on{box-shadow:inset 0 0 0 2px var(--blue-d);background:var(--blue-l)}
 
 /* diary */
-.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(223,164,180,.15);align-items:center}
+.dr{display:flex;gap:14px;width:100%;padding:16px 18px;background:var(--card);border-radius:20px;margin-bottom:12px;border:1px solid rgba(246,232,233,.95);box-shadow:0 8px 24px rgba(232,176,196,.15);align-items:center}
 .dr .dd{width:48px;text-align:center;flex:none}
 .dr .dd b{display:block;font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.1}
 .dr .dd small{font-size:11px;color:var(--sub)}
@@ -315,7 +320,7 @@ const pb=(p,c='')=>`<div class="pb ${c}" role="progressbar" aria-valuenow="${p}"
 
 /* ===== data ===== */
 const KEY='shussan-note-v1';
-const MOODS=[{v:1,n:'元気',c:'#B4D9E2'},{v:2,n:'軽い',c:'#F2E8CB'},{v:3,n:'普通',c:'#E2C3B1'},{v:4,n:'つらい',c:'#DFA4B4'},{v:5,n:'とてもつらい',c:'#BD9DC4'}];
+const MOODS=[{v:1,n:'元気',c:'#B7D4E4'},{v:2,n:'軽い',c:'#F0E4AA'},{v:3,n:'普通',c:'#F1C3BB'},{v:4,n:'つらい',c:'#E6A9BF'},{v:5,n:'とてもつらい',c:'#BBAEDA'}];
 function defaults(){
   const L={
    '母乳育児':['母乳パッド','さく乳器','授乳クッション','乳首クリーム','母乳フリーザーパック'],
@@ -510,7 +515,7 @@ function itemRow(c,i,L='cats'){
 function catCard(c,L='cats'){
   const d=c.items.filter(i=>i.done).length,t=c.items.length,p=t?Math.round(d/t*100):0,open=ui.open[c.id];
   return `<section class="card cat"><button class="cat-h" data-act="toggleCat" data-id="${c.id}" aria-expanded="${!!open}">
-   <div><h3>${esc(c.name)}</h3><span class="sub">${d} / ${t} 完了</span></div><div class="pc">${p}%</div><span class="chev ${open?'up':''}">${ic('chev')}</span></button>${pb(p)}
+   <div><h3>${esc(c.name)}</h3><span class="sub">${d} / ${t} 完了</span></div><div class="pc">${p}%</div><span class="chev ${open?'up':''}">${ic('chev')}</span></button>${pb(p,'k'+(S[L].indexOf(c)%5))}
    ${open?`<div class="items">${c.items.map(i=>itemRow(c,i,L)).join('')}
    <form class="add" data-form="addItem" data-list="${L}" data-cat="${c.id}"><input class="in" name="t" maxlength="40" placeholder="項目を追加" autocomplete="off" required><button class="btn sm">追加</button></form></div>`:''}</section>`;
 }
@@ -529,7 +534,7 @@ function spark(){
   const W=300,H=84,p=10,vs=pts.map(c=>parseFloat(c.efw)),mn=Math.min(...vs),mx=Math.max(...vs);
   const x=i=>p+i*(W-2*p)/(pts.length-1),y=v=>mx===mn?H/2:H-p-(v-mn)/(mx-mn)*(H-2*p);
   const line=vs.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#DFA4B4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#B24C6A" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
+  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#E8B0C4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#A9496A" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
 }
 function vCheckup(){
   const list=[...S.checkups].sort((a,b)=>b.date.localeCompare(a.date));
@@ -596,7 +601,7 @@ function vCal(){
   }
   const arr=monthMoods(Y,M),rec=arr.filter(Boolean),avg=rec.length?rec.reduce((a,b)=>a+b,0)/rec.length:0;
   const cnt=MOODS.map(m=>rec.filter(v=>v===m.v).length),hard=cnt[3]+cnt[4];
-  const bars=arr.map(v=>`<i style="height:${v?v*20:4}%;background:${v?MOODS[v-1].c:'#F3E4E2'}"></i>`).join('');
+  const bars=arr.map(v=>`<i style="height:${v?v*20:4}%;background:${v?MOODS[v-1].c:'#F2E6E8'}"></i>`).join('');
   const g={};Object.entries(S.moods).forEach(([k,v])=>{const m=k.slice(0,7);(g[m]=g[m]||[]).push(v)});
   const months=Object.keys(g).sort().slice(-8);
   return head('カレンダー','日記とつわりを日ごとに記録')+
