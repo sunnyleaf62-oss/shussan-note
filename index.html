@@ -290,6 +290,7 @@ nav button.on{color:var(--acc-ink);background:var(--blue-l)}
 #toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:rgba(75,64,56,.94);color:#FFFCF7;padding:10px 18px;border-radius:99px;font-size:13px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;text-align:center}
 #toast.on{opacity:1}
 .note{font-size:12.5px;color:var(--sub);margin:10px 0 0;line-height:1.7}
+.note.mini{font-size:10px;line-height:1.5;opacity:.8}
 .stack > * + *{margin-top:10px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -520,7 +521,7 @@ function shopNote(){
   if(!hasProducts())return '';
   const all=S.cats.flatMap(c=>c.items.flatMap(i=>prodList(i.t)));
   const shops=[all.some(p=>p.rk)?'楽天市場':'',all.some(p=>p.am)?'Amazon':''].filter(Boolean).join('・');
-  return `<p class="note" style="margin:0 4px 16px">「PR」の表示がある商品リンクには、アフィリエイト広告（${shops}）が含まれます。${all.some(p=>p.am)?'Amazonのアソシエイトとして、ママノートは適格販売により収入を得ています。':''}${PRODUCTS.updated?`星の評価は${esc(PRODUCTS.updated)}時点のレビュー平均です。`:''}</p>`;
+  return `<p class="note mini" style="margin:0 4px 12px">「PR」の表示がある商品リンクには、アフィリエイト広告（${shops}）が含まれます。${all.some(p=>p.am)?'Amazonのアソシエイトとして、ママノートは適格販売により収入を得ています。':''}${PRODUCTS.updated?`星の評価は${esc(PRODUCTS.updated)}時点のレビュー平均です。`:''}</p>`;
 }
 function loadProducts(){
   try{
@@ -554,7 +555,7 @@ function catCard(c,L='cats'){
    ${open?`<div class="items">${c.items.map(i=>itemRow(c,i,L)).join('')}
    <form class="add" data-form="addItem" data-list="${L}" data-cat="${c.id}"><input class="in" name="t" maxlength="40" placeholder="項目を追加" autocomplete="off" required><button class="btn sm">追加</button></form></div>`:''}</section>`;
 }
-function legendNote(){return `<p class="note" style="margin:0 4px 14px">各項目の下に「必須」「あると安心」「余裕があれば」の目安と、用意する数を表示しています。</p>`}
+function legendNote(){return `<p class="note mini" style="margin:0 4px 6px">各項目の下に、必要度の目安と用意する数を表示しています。</p>`}
 function prepCats(){let last=null;return S.cats.map(c=>{let h='';if(c.sec&&c.sec!==last){h=`<div class="sec">${esc(c.sec)}</div>`;last=c.sec}return h+catCard(c,'cats')}).join('')}
 function vPrep(){
   const s=prepStat();
