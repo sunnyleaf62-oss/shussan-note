@@ -106,7 +106,26 @@ textarea.in{resize:vertical;line-height:1.6}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .hid{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.top-act{display:flex;justify-content:flex-end;margin:-6px 0 16px}
+.top-act{display:flex;justify-content:flex-end;gap:10px;margin:-6px 0 16px}
+.btn.sm.ghost{background:var(--blue-l);color:var(--acc-ink)}
+.tli.birth{background:#FDF1F5;border-color:#F2CAD7;cursor:default}
+.tli.birth:before{background:var(--blue-d);border-color:var(--blue-d);width:14px;height:14px;left:-24px}
+.tli.birth .bn{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--acc-ink);margin-top:6px}
+.bact{display:flex;gap:16px;margin-top:12px;font-size:12.5px;font-weight:700}
+.bact button{color:var(--acc-ink);text-decoration:underline;text-underline-offset:3px;padding:2px 0}
+.fl.chk{display:flex;gap:8px;align-items:center;color:var(--ink)}
+.fl.chk input{width:18px;height:18px;accent-color:#E39AB5}
+.cele{text-align:center;padding:6px 0 4px}
+.cele h2{text-align:center;color:var(--acc-ink);margin:14px 0 6px}
+.cele-im{display:block;width:100%;height:auto;margin:4px auto 0;border-radius:20px}
+.cele .tx{display:none}
+.cele.noimg .tx{display:block}
+.cele-m{font-family:var(--serif);font-size:16px;margin:0 0 6px;line-height:1.7}
+.cele-n{font-size:13px;color:var(--sub);margin:12px 0 0}
+.cele .btn{margin-top:14px}
+@media (prefers-reduced-motion:no-preference){.cele{animation:pop .35s ease-out}}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+.dmark{font-size:11px;color:var(--faint);margin:4px 0 14px;line-height:1.6}
 .empty{text-align:center;color:var(--sub);font-size:13.5px;padding:34px 12px}
 .hero.empty{text-align:left;color:var(--ink);padding:20px 18px}
 .hero .in{background:rgba(255,253,250,.96)}
@@ -338,7 +357,7 @@ const MOODS=[{v:1,n:'元気',c:'#B7D4E4'},{v:2,n:'軽い',c:'#F0E4AA'},{v:3,n:'�
 function defaults(){
   return{v:1,listVer:7,due:'',birth:'',procs:procDefaults(),
    cats:prepDefaults(),
-   checkups:[],echoes:[],moods:{},diary:{},
+   checkups:[],echoes:[],moods:{},diary:{},baby:null,
    wishes:wishDefaults(),wishVer:2};
 }
 const PH=[['e','初期','〜15週ごろ'],['m','中期','16〜27週ごろ'],['l','後期','28週〜出産']];
@@ -386,6 +405,7 @@ function normalize(o){
   const r=Object.assign(d,o);
   ['cats','checkups','echoes','wishes','procs'].forEach(k=>{if(!Array.isArray(r[k]))r[k]=d[k]});
   ['moods','diary'].forEach(k=>{if(!r[k]||typeof r[k]!=='object'||Array.isArray(r[k]))r[k]={}});
+  if(!r.baby||typeof r.baby!=='object'||Array.isArray(r.baby))r.baby=null;
   if(typeof r.due!=='string')r.due='';
   if(typeof r.birth!=='string')r.birth='';
   if(oldVer<7){
@@ -567,21 +587,48 @@ function vPrep(){
 
 /* --- checkup --- */
 function spark(){
-  const pts=S.checkups.filter(c=>parseFloat(c.efw)>0).sort((a,b)=>a.date.localeCompare(b.date));
+  const est=S.checkups.filter(c=>parseFloat(c.efw)>0).sort((a,b)=>a.date.localeCompare(b.date)).map(c=>({v:parseFloat(c.efw),date:c.date}));
+  const bw=S.baby&&parseFloat(S.baby.weight)>0?{v:parseFloat(S.baby.weight),date:S.baby.date}:null;
+  const pts=bw?est.concat([bw]):est;
   if(pts.length<2)return '';
-  const W=300,H=84,p=10,vs=pts.map(c=>parseFloat(c.efw)),mn=Math.min(...vs),mx=Math.max(...vs);
+  const W=300,H=96,p=12,vs=pts.map(c=>c.v),mn=Math.min(...vs),mx=Math.max(...vs);
   const x=i=>p+i*(W-2*p)/(pts.length-1),y=v=>mx===mn?H/2:H-p-(v-mn)/(mx-mn)*(H-2*p);
-  const line=vs.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-  return `<div class="card"><h3>推定体重の推移</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="推定体重の推移グラフ"><polyline points="${line}" fill="none" stroke="#E8B0C4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${vs.map((v,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#A9496A" stroke-width="2.5"/>`).join('')}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g</span></div></div>`;
+  const P=i=>`${x(i).toFixed(1)},${y(vs[i]).toFixed(1)}`;
+  const n=est.length;
+  const line=n>=2?`<polyline points="${est.map((c,i)=>P(i)).join(' ')}" fill="none" stroke="#E8B0C4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:'';
+  const dash=bw&&n>=1?`<polyline points="${P(n-1)} ${P(n)}" fill="none" stroke="#E8B0C4" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round"/>`:'';
+  const dots=est.map((c,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(vs[i]).toFixed(1)}" r="4" fill="#FFFDFB" stroke="#A9496A" stroke-width="2.5"/>`).join('')+(bw?`<circle cx="${x(n).toFixed(1)}" cy="${y(bw.v).toFixed(1)}" r="6.5" fill="#E39AB5" stroke="#A9496A" stroke-width="2.5"/>`:'');
+  return `<div class="card"><h3>${bw?'体重の推移':'推定体重の推移'}</h3><svg viewBox="0 0 ${W} ${H}" width="100%" style="margin-top:12px;display:block" role="img" aria-label="体重の推移グラフ">${line}${dash}${dots}</svg><div class="axis" style="margin-top:6px"><span>${jd(pts[0].date,false)}</span><span>${bw?`出生時 ${Math.round(bw.v).toLocaleString()}g`:`最新 ${Math.round(vs[vs.length-1]).toLocaleString()}g`}</span></div>${bw?'<p class="dmark">○ 健診の推定体重　● 生まれたときの体重</p>':''}</div>`;
+}
+function birthCard(){
+  const b=S.baby;if(!b)return '';
+  const wk=b.w!==''&&b.w!=null?`妊娠${b.w}週${b.d||0}日`:'';
+  const chips=(b.weight?`<span class="chip"><em>体重</em>${(+b.weight).toLocaleString()}<small>g</small></span>`:'')+(b.height?`<span class="chip"><em>身長</em>${esc(b.height)}<small>cm</small></span>`:'');
+  return `<div class="tli birth"><div class="d"><b>${jd(b.date)}</b>${wk?`<span class="badge">${wk}で誕生</span>`:''}</div>${b.name?`<div class="bn">${esc(b.name)}</div>`:''}${chips?`<div class="chips">${chips}</div>`:''}${b.comment?`<p class="cm">${esc(b.comment)}</p>`:''}<div class="bact"><button data-act="editBirth">編集</button><button data-act="celebrate">お祝いメッセージを見る</button></div></div>`;
+}
+function birthSheet(){
+  const b=Object.assign({name:'',date:todayS(),weight:'',height:'',comment:''},S.baby||{}),isNew=!S.baby;
+  const defName=/^(あかちゃん|\d+人目)$/.test(curP().name);
+  sheet(`<h2>${isNew?'出産を記録':'出産の記録を編集'}</h2><form data-form="birth"><label class="fl">赤ちゃんの名前（任意）<input class="in" name="name" maxlength="20" value="${esc(b.name)}" placeholder="例 はな"></label>
+  <label class="fl">出産日<input class="in" type="date" name="date" value="${b.date}" required></label>
+  <div class="two"><label class="fl">出生時の体重（g）<input class="in" inputmode="decimal" name="weight" value="${esc(b.weight)}" placeholder="例 3120" required></label><label class="fl">身長（cm）<input class="in" inputmode="decimal" name="height" value="${esc(b.height)}" placeholder="例 50.2"></label></div>
+  <label class="fl chk"><input type="checkbox" name="useName" ${isNew&&defName?'checked':''}>この名前を、プロフィールの名前にも使う</label>
+  <label class="fl">ひとこと（任意）<textarea class="in" name="comment" rows="3" placeholder="生まれたときの気持ちなど">${esc(b.comment)}</textarea></label>
+  <p class="note" style="margin:0 0 14px">出産日は、「出産後の手続き」の出産日にも入ります。</p>
+  <button class="btn block">保存</button>${isNew?'':'<button type="button" class="btn-text danger" data-act="delBirth">出産の記録を削除</button>'}</form>`);
+}
+function celebrate(){
+  const b=S.baby;if(!b)return;
+  sheet(`<div class="cele"><img class="cele-im" src="celebrate.jpg" alt="おめでとうございます！ここまで本当にお疲れさまでした。あなたと赤ちゃんの毎日が、やさしく穏やかなものでありますように" onerror="this.parentNode.classList.add('noimg');this.remove()"><div class="tx"><h2>おめでとうございます！</h2><p class="cele-m">すくすく育ってくれますように♡</p></div>${b.name?`<p class="cele-n">${esc(b.name)}</p>`:''}<button class="btn block" data-act="closeSheet">とじる</button></div>`);
 }
 function vCheckup(){
   const list=[...S.checkups].sort((a,b)=>b.date.localeCompare(a.date));
   const chip=(k,v,u)=>v!==''&&v!=null?`<span class="chip"><em>${k}</em>${esc(u==='g'?(+v).toLocaleString():v)}<small>${u}</small></span>`:'';
   return head('妊婦健診記録','毎回の健診結果を残しておきましょう')+
-  `<div class="top-act"><button class="btn sm" data-act="newCheckup">${ic('plus')}健診を記録</button></div>`+spark()+
-  (list.length?`<div class="tl">${list.map(c=>{
+  `<div class="top-act"><button class="btn sm" data-act="newCheckup">${ic('plus')}健診を記録</button>${S.baby?'':`<button class="btn sm ghost" data-act="newBirth">出産を記録</button>`}</div>`+spark()+
+  (list.length||S.baby?`<div class="tl">${birthCard()}${list.map(c=>{
     const wk=c.w!==''&&c.w!=null?`妊娠${c.w}週${c.d||0}日`:'';
-    const chips=chip('推定体重',c.efw,'g')+chip('BPD',c.bpd,'mm')+chip('FL',c.fl,'mm')+chip('AC',c.ac,'mm');
+    const chips=chip('推定体重',c.efw,'g')+chip('BPD（頭の幅）',c.bpd,'mm')+chip('FL（太ももの骨）',c.fl,'mm')+chip('AC（おなか周り）',c.ac,'mm');
     return `<button class="tli" data-act="editCheckup" data-id="${c.id}"><div class="d"><b>${jd(c.date)}</b>${wk?`<span class="badge">${wk}</span>`:''}</div>${chips?`<div class="chips">${chips}</div>`:''}${c.comment?`<p class="cm">${esc(c.comment)}</p>`:''}</button>`}).join('')}</div>`
   :`<div class="card empty">まだ記録がありません。<br>次の健診のあとに追加しましょう。</div>`);
 }
@@ -593,6 +640,7 @@ function checkupSheet(c){
   <div class="two"><label class="fl">妊娠週数（週）<input class="in" type="number" inputmode="numeric" min="0" max="45" name="w" value="${esc(c.w)}"></label><label class="fl">日<input class="in" type="number" inputmode="numeric" min="0" max="6" name="d" value="${esc(c.d)}"></label></div>
   <label class="fl">推定体重（g）<input class="in" inputmode="decimal" name="efw" value="${esc(c.efw)}" placeholder="例 1250"></label>
   <div class="three"><label class="fl">BPD（mm）<input class="in" inputmode="decimal" name="bpd" value="${esc(c.bpd)}"></label><label class="fl">FL（mm）<input class="in" inputmode="decimal" name="fl" value="${esc(c.fl)}"></label><label class="fl">AC（mm）<input class="in" inputmode="decimal" name="ac" value="${esc(c.ac)}"></label></div>
+  <p class="note" style="margin:-4px 0 14px;font-size:11.5px">BPD＝頭の横幅（児頭大横径）／FL＝太ももの骨の長さ（大腿骨長）／AC＝おなか周りの長さ（腹囲）</p>
   <label class="fl">コメント<textarea class="in" name="comment" rows="3" placeholder="先生の話、気になることなど">${esc(c.comment)}</textarea></label>
   <button class="btn block">保存</button>${c.id?`<button type="button" class="btn-text danger" data-act="delCheckup" data-id="${c.id}">この記録を削除</button>`:''}</form>`);
 }
@@ -772,6 +820,10 @@ const A={
  toggleMemo:d=>{ui.memo[d.id]=!ui.memo[d.id];render()},
  delItem:d=>{const c=S[d.list||'cats'].find(c=>c.id===d.cat);const i=c?.items.find(i=>i.id===d.id);if(!i||!confirm(`「${i.t}」を削除しますか？`))return;c.items=c.items.filter(x=>x.id!==d.id);save();render()},
  newCheckup:()=>checkupSheet(),
+ newBirth:()=>birthSheet(),
+ editBirth:()=>birthSheet(),
+ celebrate:()=>celebrate(),
+ delBirth:()=>{if(!confirm('出産の記録を削除しますか？'))return;S.baby=null;save();closeSheet();render()},
  editCheckup:d=>checkupSheet(S.checkups.find(c=>c.id===d.id)),
  delCheckup:d=>{if(!confirm('この健診記録を削除しますか？'))return;S.checkups=S.checkups.filter(c=>c.id!==d.id);save();closeSheet();render()},
  newEcho:()=>echoSheet(),
@@ -803,6 +855,18 @@ const F={
   const o={id:fd.get('id')||uid(),date:fd.get('date')};['w','d','efw','bpd','fl','ac'].forEach(k=>o[k]=(fd.get(k)||'').trim());o.comment=(fd.get('comment')||'').trim();
   const i=S.checkups.findIndex(c=>c.id===o.id);if(i>=0)S.checkups[i]=o;else S.checkups.push(o);
   save();closeSheet();render();toast('保存しました')
+ },
+ birth:(f,fd)=>{
+  const isNew=!S.baby,date=fd.get('date');if(!date)return;
+  let v=parseFloat(((fd.get('weight')||'').trim()).replace(/,/g,''));
+  if(!(v>0)){toast('体重を入れてください');return}
+  if(v<20)v=Math.round(v*1000);
+  const g=gest(date),name=(fd.get('name')||'').trim().slice(0,20);
+  S.baby={name,date,w:g?g.w:'',d:g?g.d:'',weight:String(v),height:(fd.get('height')||'').trim(),comment:(fd.get('comment')||'').trim()};
+  S.birth=date;
+  if(fd.get('useName')&&name)curP().name=name;
+  save();closeSheet();render();
+  if(isNew)celebrate();else toast('保存しました')
  },
  echo:(f,fd)=>{
   if(!tmpPhoto){toast('写真を選んでください');return}
